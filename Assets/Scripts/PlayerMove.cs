@@ -3,67 +3,88 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
-{
-    public Transform GroundCheck;
-    public CharacterController Controller;
+{    
+    public CharacterController controller;
 
     public LayerMask groundMask;
-    
+
     public float gravity = -10f;
-    public float groundDistance = 0.4f;
-    public float speed = 12f;
+
+    internal float walkSpeed = 4f;
+    internal float runSpeed = 8f;
+    internal float crouchSpeed = 2f;
+    internal float currentHorizontalSpeed = 12f;
+
+    public float verticalSpeed = 0f;
+
     public float jumpHeight = 2f;
 
-    private bool isGrounded;
-
-    Vector3 velocity;
     
     void Update()
     {
-        Movement(Controller, speed);
+        #region WASD
 
-
-        isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, groundMask);
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-        Controller.Move(velocity * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-
-
-        Jumping();
-    }
-
-    private void Jumping()
-    {
-        
-    }
-
-    private void Movement(CharacterController Controller_, float speed_)
-    {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
-        Vector3 move = transform.right * x + transform.forward * z;
-        Controller_.Move(move.normalized * speed_ * Time.deltaTime);
-    }
 
-    //private void Gravity(CharacterController Controller_, Transform GroundCheck_, Vector3 velocity_, LayerMask groundMask_, float groundDistance_, float gravity_)
+        Vector3 strafeAmount = transform.right * x; //Left + Right
+        Vector3 forwardAmount = transform.forward * z; //Forward + Back
+        Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
+
+        Vector3 WASDMovement = runSpeed * Time.deltaTime * WASDAmount.normalized;                
+        #endregion
+
+        #region JUMPING
+
+        if (controller.isGrounded)
+        {
+            verticalSpeed = 0f;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+        }
+
+        verticalSpeed += gravity * Time.deltaTime;
+
+        #endregion
+
+        Vector3 movement = new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z);
+        controller.Move(movement);
+
+        print("isGrounded = " + controller.isGrounded);
+    }    
+
+    //private void GroundCheck(Transform GroundChecker_, bool isGrounded_, float groundDistance_, LayerMask groundMask_, Vector3 velocity_)
     //{
-    //    isGrounded = Physics.CheckSphere(GroundCheck_.position, groundDistance_, groundMask_);
-    //    if (isGrounded && velocity_.y < 0)
+    //    isGrounded_ = Physics.CheckSphere(GroundChecker_.position, groundDistance_, groundMask_);
+
+    //    if (isGrounded_ && velocity_.y < 0)
     //    {
     //        velocity_.y = -2f;
     //    }
+    //}
 
+    //private void Gravity(CharacterController Controller_, Vector3 velocity_, float gravity_)
+    //{
     //    velocity_.y += gravity_ * Time.deltaTime;
     //    Controller_.Move(velocity_ * Time.deltaTime);
     //}
 
+    //private void Jumping(Vector3 velocity_, bool isGrounded_, float gravity_)
+    //{
+    //    if (Input.GetButtonDown("Jump") && isGrounded_)
+    //    {
+    //        velocity_.y = Mathf.Sqrt(jumpHeight * -2f * gravity_);
+    //    }
+    //}
+
+    //private void WASDMovement(CharacterController Controller_, Transform transform_, float speed_)
+    //{
+    //    float x = Input.GetAxisRaw("Horizontal");
+    //    float z = Input.GetAxisRaw("Vertical");
+    //    Vector3 move = transform_.right * x + transform_.forward * z;
+    //    Controller_.Move(move.normalized * speed_ * Time.deltaTime);
+    //}
 }
