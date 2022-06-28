@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public string stateCategoryName;
-    public List<string> inputtedStates = new();
-    public Dictionary<int, string> availableStates = new();
+    public string stateType;
+    public List<string> potentialStates = new();
 
-    public string initialState;
-    public string currentState;
+    public string initialState, currentState;    
 
-    // Start is called before the first frame update
     void Start()
-    {
-        foreach (string state_ in inputtedStates)
+    {        
+        if (potentialStates.Contains(initialState))
         {
-            AddState(state_);
+            currentState = initialState;
         }
-        currentState = initialState;
+        else
+        {
+            print(initialState + " not found");
+        }
     }
 
     public void AddState(string state_)
     {
-        if (!availableStates.ContainsValue(state_))
+        if (!potentialStates.Contains(state_))
         {
-            availableStates.Add(availableStates.Keys.Count - 1, state_);
+            potentialStates.Add(state_);
         }
         else
         {
@@ -35,7 +35,7 @@ public class Status : MonoBehaviour
 
     public void ChangeCurrentState(string state_)
     {
-        if (availableStates.ContainsValue(state_))
+        if (potentialStates.Contains(state_))
         {
             currentState = state_;
         }
@@ -45,15 +45,4 @@ public class Status : MonoBehaviour
         }
     }
 
-    public void ChangeCurrentState(int stateIndex_)
-    {
-        if (availableStates.ContainsKey(stateIndex_))
-        {
-            currentState = availableStates[stateIndex_];
-        }
-        else
-        {
-            print("no state was found at index " + stateIndex_ + " on " + gameObject);
-        }
-    }
 }

@@ -13,9 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region PLAYER ATTRIBUTES
-    public float walkSpeed;
-    public float runSpeed;
-    public float crouchSpeed;
+    public float walkSpeed, runSpeed, crouchSpeed;
     float currentHorizontalSpeed;
 
     float verticalSpeed = 0f;
@@ -40,14 +38,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (movementState.currentState == "crouching")
             {
-                movementState.ChangeCurrentState("walking");
-                print("changing to walking");
+                movementState.ChangeCurrentState("walking");                
                 inputThisFrame = true;
             }
             else if (movementState.currentState != "crouching")
             {
-                movementState.ChangeCurrentState("crouching");
-                print("changing to crouching");
+                movementState.ChangeCurrentState("crouching");                
                 inputThisFrame = true;
             }
 
@@ -57,14 +53,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (movementState.currentState == "running")
             {
-                movementState.ChangeCurrentState("walking");
-                print("changing to walking");
+                movementState.ChangeCurrentState("walking");                
                 inputThisFrame = true;
             }
             else if (movementState.currentState != "running")
             {
-                movementState.ChangeCurrentState("running");
-                print("changing to running");
+                movementState.ChangeCurrentState("running");                
                 inputThisFrame = true;
             }
 

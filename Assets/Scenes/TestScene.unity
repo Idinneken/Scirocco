@@ -388,8 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70baf89045f3f49498fb0e8180ebd840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateCategoryName: Movement Modifiers
-  inputtedStates:
+  stateType: Movement Types
+  potentialStates:
   - walking
   - running
   - crouching
