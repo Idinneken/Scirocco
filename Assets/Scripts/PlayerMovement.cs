@@ -2,37 +2,80 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {    
     public CharacterController controller;
+    public Status movementState;
 
     public LayerMask groundMask;
 
     public float gravity = -10f;
 
-    internal float walkSpeed = 4f;
+    internal float walkSpeed = 8f;
     internal float runSpeed = 8f;
     internal float crouchSpeed = 2f;
-    internal float currentHorizontalSpeed = 12f;
+    internal float currentHorizontalSpeed;
 
     public float verticalSpeed = 0f;
 
     public float jumpHeight = 2f;
 
-    
+
+
     void Update()
     {
-        #region WASD
+        #region GATHERING FREE INPUTS
 
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
+        bool jump = Input.GetButtonDown("Jump");
+
+        #endregion
+
+        #region GATHERING RULE-BOUND INPUTS
+
+        if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.C) && movementState.currentState != "crouching")
+        {
+            movementState.ChangeCurrentState("crouching");
+            print("changing to crouching");
+        }
+
+        if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.C) && movementState.currentState == "crouching")
+        {
+            movementState.ChangeCurrentState("walking");
+            print("changing to walking");
+        }
+
+
+        #endregion
+
+        #region MOVEMENT MODIFIERS
+
+        if (movementState.currentState == "crouching")
+        {
+            currentHorizontalSpeed = crouchSpeed;
+        }
+
+        if (movementState.currentState == "walking")
+        {
+            currentHorizontalSpeed = walkSpeed;
+        }
+
+
+        #endregion
+
+        #region WASD
+
+
 
         Vector3 strafeAmount = transform.right * x; //Left + Right
         Vector3 forwardAmount = transform.forward * z; //Forward + Back
         Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
 
-        Vector3 WASDMovement = runSpeed * Time.deltaTime * WASDAmount.normalized;                
+        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized;
         #endregion
+
+        
 
         #region JUMPING
 
@@ -40,9 +83,10 @@ public class PlayerMove : MonoBehaviour
         {
             verticalSpeed = 0f;
 
-            if (Input.GetButtonDown("Jump"))
+            if (jump is true)
             {
                 verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                jump = false;
             }
         }
 
