@@ -50,41 +50,27 @@ public class PlayerMove : MonoBehaviour
 
         #endregion
 
-        Vector3 movement = new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z);
+        Vector3 movement = AdjustVelocityToSlope(new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z));        
         controller.Move(movement);
 
-        print("isGrounded = " + controller.isGrounded);
+        //print("isGrounded = " + controller.isGrounded);
     }    
 
-    //private void GroundCheck(Transform GroundChecker_, bool isGrounded_, float groundDistance_, LayerMask groundMask_, Vector3 velocity_)
-    //{
-    //    isGrounded_ = Physics.CheckSphere(GroundChecker_.position, groundDistance_, groundMask_);
+    private Vector3 AdjustVelocityToSlope(Vector3 velocity_)
+    {
+        var ray = new Ray(transform.position, Vector3.down); //Cast a ray to the floor
 
-    //    if (isGrounded_ && velocity_.y < 0)
-    //    {
-    //        velocity_.y = -2f;
-    //    }
-    //}
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.2f)) //If the ray hits
+        {
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal); //Get the rotation of the slope 
+            var adjustedVelocity = slopeRotation * velocity_; //Adjusted velocity = Rotation of the slope * the velocity
 
-    //private void Gravity(CharacterController Controller_, Vector3 velocity_, float gravity_)
-    //{
-    //    velocity_.y += gravity_ * Time.deltaTime;
-    //    Controller_.Move(velocity_ * Time.deltaTime);
-    //}
+            if (adjustedVelocity.y < 0) //If the y of the velocity is less than 0 (if going down the slope)
+            {
+                return adjustedVelocity; //Return the calculated velocity
+            }            
+        }
+        return velocity_; //Otherwise, return the velocity already given
+    }
 
-    //private void Jumping(Vector3 velocity_, bool isGrounded_, float gravity_)
-    //{
-    //    if (Input.GetButtonDown("Jump") && isGrounded_)
-    //    {
-    //        velocity_.y = Mathf.Sqrt(jumpHeight * -2f * gravity_);
-    //    }
-    //}
-
-    //private void WASDMovement(CharacterController Controller_, Transform transform_, float speed_)
-    //{
-    //    float x = Input.GetAxisRaw("Horizontal");
-    //    float z = Input.GetAxisRaw("Vertical");
-    //    Vector3 move = transform_.right * x + transform_.forward * z;
-    //    Controller_.Move(move.normalized * speed_ * Time.deltaTime);
-    //}
 }
