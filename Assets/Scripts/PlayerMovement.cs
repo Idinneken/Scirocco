@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{    
+{
     public CharacterController controller;
     public Status movementState;
 
@@ -11,19 +11,21 @@ public class PlayerMovement : MonoBehaviour
 
     public float gravity = -10f;
 
-    internal float walkSpeed = 8f;
-    internal float runSpeed = 8f;
-    internal float crouchSpeed = 2f;
-    internal float currentHorizontalSpeed;
 
-    public float verticalSpeed = 0f;
+    #region PLAYER ATTRIBUTES
+    public float walkSpeed;
+    public float runSpeed;
+    public float crouchSpeed;
+    float currentHorizontalSpeed;
 
+    float verticalSpeed = 0f;
     public float jumpHeight = 2f;
-
-
+    #endregion
 
     void Update()
     {
+        bool inputThisFrame = false;
+
         #region GATHERING FREE INPUTS
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -33,26 +35,47 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region GATHERING RULE-BOUND INPUTS
-
-        if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.C) && movementState.currentState != "crouching")
+        
+        if (Input.GetKeyDown(KeyCode.C) && inputThisFrame == false && controller.isGrounded)
         {
-            movementState.ChangeCurrentState("crouching");
-            print("changing to crouching");
+            if (movementState.currentState == "crouching")
+            {
+                movementState.ChangeCurrentState("walking");
+                print("changing to walking");
+                inputThisFrame = true;
+            }
+            else if (movementState.currentState != "crouching")
+            {
+                movementState.ChangeCurrentState("crouching");
+                print("changing to crouching");
+                inputThisFrame = true;
+            }
+
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && Input.GetKey(KeyCode.C) && movementState.currentState == "crouching")
+        if (Input.GetKeyDown(KeyCode.LeftShift) && inputThisFrame == false && controller.isGrounded)
         {
-            movementState.ChangeCurrentState("walking");
-            print("changing to walking");
-        }
+            if (movementState.currentState == "running")
+            {
+                movementState.ChangeCurrentState("walking");
+                print("changing to walking");
+                inputThisFrame = true;
+            }
+            else if (movementState.currentState != "running")
+            {
+                movementState.ChangeCurrentState("running");
+                print("changing to running");
+                inputThisFrame = true;
+            }
 
-
+        }        
+        
         #endregion
 
         #region MOVEMENT MODIFIERS
 
         if (movementState.currentState == "crouching")
-        {
+        {            
             currentHorizontalSpeed = crouchSpeed;
         }
 
@@ -61,44 +84,41 @@ public class PlayerMovement : MonoBehaviour
             currentHorizontalSpeed = walkSpeed;
         }
 
+        if (movementState.currentState == "running")
+        {
+            currentHorizontalSpeed = runSpeed;
+        }
+
 
         #endregion
 
         #region WASD
-
-
-
         Vector3 strafeAmount = transform.right * x; //Left + Right
         Vector3 forwardAmount = transform.forward * z; //Forward + Back
         Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
-
-        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized;
+        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed
         #endregion
-
-        
 
         #region JUMPING
 
         if (controller.isGrounded)
         {
             verticalSpeed = 0f;
-
             if (jump is true)
             {
                 verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 jump = false;
             }
         }
-
         verticalSpeed += gravity * Time.deltaTime;
 
         #endregion
 
-        Vector3 movement = AdjustVelocityToSlope(new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z));        
+        Vector3 movement = AdjustVelocityToSlope(new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z));
         controller.Move(movement);
+    }
 
-        //print("isGrounded = " + controller.isGrounded);
-    }    
+    
 
     private Vector3 AdjustVelocityToSlope(Vector3 velocity_)
     {
@@ -112,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
             if (adjustedVelocity.y < 0) //If the y of the velocity is less than 0 (if going down the slope)
             {
                 return adjustedVelocity; //Return the calculated velocity
-            }            
+            }
         }
         return velocity_; //Otherwise, return the velocity already given
     }

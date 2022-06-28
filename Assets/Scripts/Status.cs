@@ -9,11 +9,11 @@ public class Status : MonoBehaviour
     public Dictionary<int, string> availableStates = new();
 
     public string initialState;
-    public string currentState;    
-    
+    public string currentState;
+
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         foreach (string state_ in inputtedStates)
         {
             AddState(state_);
@@ -22,7 +22,7 @@ public class Status : MonoBehaviour
     }
 
     public void AddState(string state_)
-    {        
+    {
         if (!availableStates.ContainsValue(state_))
         {
             availableStates.Add(availableStates.Keys.Count - 1, state_);
@@ -49,14 +49,11 @@ public class Status : MonoBehaviour
     {
         if (availableStates.ContainsKey(stateIndex_))
         {
-            currentState = availableStates[stateIndex_];            
+            currentState = availableStates[stateIndex_];
         }
         else
         {
             print("no state was found at index " + stateIndex_ + " on " + gameObject);
-        }        
+        }
     }
-
-    
-
 }
