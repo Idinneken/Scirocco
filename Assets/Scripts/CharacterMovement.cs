@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Status movementState;
     public LayerMask groundMask;
 
-    //Player specific
+    //Character specific
     float currentHorizontalSpeed, verticalSpeed;    
     public bool squatting;    
-    public float walkSpeed, runSpeed, crouchSpeed, jumpHeight;
+    public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
+    internal bool walkCondition, runCondition, crouchCondition, slideCondition;
 
     //Global
     public float gravity = -10f;

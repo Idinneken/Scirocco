@@ -5,7 +5,7 @@ using UnityEngine;
 public class Status : MonoBehaviour
 {
     public string stateType;
-    public List<string> potentialStates = new();
+    public List<string> potentialStates = new();    
 
     public string initialState, currentState;    
 
@@ -18,7 +18,7 @@ public class Status : MonoBehaviour
         else
         {
             print(initialState + " not found");
-        }
+        }        
     }
 
     public void AddState(string state_)
@@ -44,5 +44,4 @@ public class Status : MonoBehaviour
             print(state_ + " not found on " + gameObject);
         }
     }
-
 }
