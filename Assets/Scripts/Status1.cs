@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Status1 : MonoBehaviour
+public class Status1 : SerializedMonoBehaviour
 {
     public string stateType, initialStateName;
     Component connectedComponent;
     public Dictionary<string, Dictionary<string, string>> potentialStates = new();
-    public Dictionary<string, string> currentState = new();
-
-    List<List<string>> fub = new();
+    public Dictionary<string, string> currentState = new();    
 
     void Start()
     {        
