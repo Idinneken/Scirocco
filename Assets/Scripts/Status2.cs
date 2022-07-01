@@ -7,19 +7,18 @@ using System.Runtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Status1 : SerializedMonoBehaviour
+public class Status2 : SerializedMonoBehaviour
 {
     Component connectedComponent;
-
-    public string stateType, initialStateName;    
-    public Dictionary<string, Dictionary<string, string>> potentialStates = new();
-    public Dictionary<string, string> currentState = new();    
-
+    public string stateType, initialStateName;
+    public Dictionary<string, Dictionary<string, string>> currentState = new();
+    public Dictionary<string, Dictionary<string, Dictionary<string, string>>> potentialStates = new();
+    
     void Start()
     {        
         if (potentialStates.ContainsKey(initialStateName))
         {
-            currentState = potentialStates[initialStateName];
+            currentState = potentialStates[initialStateName];            
         }
         else
         {
@@ -27,7 +26,7 @@ public class Status1 : SerializedMonoBehaviour
         }        
     }
 
-    public void AddState(string stateName_, Dictionary<string, string> attributes_)
+    public void AddState(string stateName_, Dictionary<string, Dictionary<string, string>> attributes_)
     {
         if (!potentialStates.ContainsKey(stateName_))
         {

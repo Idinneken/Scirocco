@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public CharacterController controller;
-    public Status movementState;
+    public Status1 movementState;
     public LayerMask groundMask;
 
     //Character specific
@@ -33,47 +33,28 @@ public class CharacterMovement : MonoBehaviour
         {            
             if (Input.GetKeyDown(KeyCode.C))
             {
-                if (movementState.currentState == "crouching")
+                if (movementState.currentState != movementState.potentialStates["crouching"])
                 {
-                    movementState.ChangeCurrentState("walking");                    
+                    movementState.ChangeCurrentStateTo("crouching");                    
                 }
-                else if (movementState.currentState != "crouching")
+                else
                 {
-                    movementState.ChangeCurrentState("crouching");
+                    movementState.ChangeCurrentStateTo("walking");
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if (movementState.currentState == "running")
+                if (movementState.currentState != movementState.potentialStates["running"])
                 {
-                    movementState.ChangeCurrentState("walking");                    
+                    movementState.ChangeCurrentStateTo("running");
                 }
-                else if (movementState.currentState != "running")
+                else
                 {
-                    movementState.ChangeCurrentState("running");                    
+                    movementState.ChangeCurrentStateTo("walking");
                 }
             }
         }                        
-        #endregion
-
-        #region MOVEMENT MODIFIERS
-
-        if (movementState.currentState == "crouching")
-        {            
-            currentHorizontalSpeed = crouchSpeed;
-        }
-
-        if (movementState.currentState == "walking")
-        {
-            currentHorizontalSpeed = walkSpeed;
-        }
-
-        if (movementState.currentState == "running")
-        {
-            currentHorizontalSpeed = runSpeed;
-        }
-
         #endregion
 
         Vector3 strafeAmount = transform.right * x; //Left + Right
