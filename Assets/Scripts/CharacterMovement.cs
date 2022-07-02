@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public CharacterController controller;
-    public Status1 movementState;
+    public Status2 movementState;
     public LayerMask groundMask;
 
     //Character specific
@@ -29,17 +29,22 @@ public class CharacterMovement : MonoBehaviour
 
         #region GATHERING RULE-BOUND INPUTS
         
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            movementState.SetState("walking");
+        }
+
         if (controller.isGrounded)
         {            
             if (Input.GetKeyDown(KeyCode.C))
             {
                 if (movementState.currentState != movementState.potentialStates["crouching"])
                 {
-                    movementState.ChangeCurrentStateTo("crouching");                    
+                    movementState.SetState("crouching");                    
                 }
                 else
                 {
-                    movementState.ChangeCurrentStateTo("walking");
+                    movementState.SetState("walking");
                 }
             }
 
@@ -47,11 +52,11 @@ public class CharacterMovement : MonoBehaviour
             {
                 if (movementState.currentState != movementState.potentialStates["running"])
                 {
-                    movementState.ChangeCurrentStateTo("running");
+                    movementState.SetState("running");
                 }
                 else
                 {
-                    movementState.ChangeCurrentStateTo("walking");
+                    movementState.SetState("walking");
                 }
             }
         }                        
