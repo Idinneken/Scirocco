@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask groundMask;
 
     //Character specific
-    float currentHorizontalSpeed, verticalSpeed;    
+    float currentHorizontalSpeed, verticalSpeed = 0f;    
     public bool squatting;    
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
     internal bool walkCondition, runCondition, crouchCondition, slideCondition;
@@ -32,6 +32,7 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             movementState.SetState("walking");
+            print(currentHorizontalSpeed);
         }
 
         if (controller.isGrounded)
