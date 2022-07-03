@@ -42,13 +42,16 @@ public class Status2 : SerializedMonoBehaviour
             {                
                 foreach (KeyValuePair<string, string> variableData in currentState[componentData.Key]) //foreach variable in the current state at the key "character movement"
                 {
-                    Component component = gameObject.GetComponent(componentData.Key);
-                    var componentVariable = component.GetType().GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
-                    Type componentVariableType = componentVariable.FieldType;
+                    Component component = gameObject.GetComponent(componentData.Key);                    
+                    var componentField = component.GetType().GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
+                    FieldInfo componentFieldInfo = component.GetType().GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
+                    Type componentFieldType = componentField.FieldType;
 
-                    var changedVariable = JsonConvert.DeserializeObject(variableData.Value, componentVariableType);
+                    var changedValue = JsonConvert.DeserializeObject(variableData.Value, componentFieldType);
                     
-                    print(changedVariable.GetType() + ": " + changedVariable);                    
+                    print(changedValue.GetType() + ": " + changedValue);
+
+                    //componentFieldInfo.SetValue(componentField, changedValue);
 
                     //component.GetType()
                     //    .GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty)
