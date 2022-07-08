@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     public CharacterController controller;
-    public Status2 movementState;
+    public EntityState movementState;
     public LayerMask groundMask;
 
     //Character specific
@@ -18,7 +18,7 @@ public class CharacterMovement : MonoBehaviour
     public float gravity = -10f;
 
     void Update()
-    {        
+    {
         #region GATHERING FREE INPUTS
 
         float x = Input.GetAxisRaw("Horizontal");
