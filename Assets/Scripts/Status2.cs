@@ -23,7 +23,7 @@ public class Status2 : SerializedMonoBehaviour
             print(initialStateName + " not found");
         }        
     }
-
+    
     public void AddState(string stateName_, Dictionary<string, Dictionary<string, string>> attributes_)
     {
         if (!potentialStates.ContainsKey(stateName_))
@@ -34,85 +34,22 @@ public class Status2 : SerializedMonoBehaviour
 
     public void SetState(string stateName_)
     {
+        const System.Reflection.BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
+
         if (potentialStates.ContainsKey(stateName_)) //if potentialStates.ContainsKey("walking")
         {            
             currentState = potentialStates[stateName_]; //currentState = potentialStates["walking"]
                                                         
             foreach (KeyValuePair<string, Dictionary<string,string>> componentData in currentState) //foreach component in the current state
-            {                
+            {       
+                Component component = gameObject.GetComponent(componentData.Key);                    
+                         
                 foreach (KeyValuePair<string, string> variableData in currentState[componentData.Key]) //foreach variable in the current state at the key "character movement"
-                {
-                    Component component = gameObject.GetComponent(componentData.Key);                    
-                    var componentField = component.GetType().GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
-                    FieldInfo componentFieldInfo = component.GetType().GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
-                    Type componentFieldType = componentField.FieldType;
-
-                    var changedValue = JsonConvert.DeserializeObject(variableData.Value, componentFieldType);
-                    
-                    print(changedValue.GetType() + ": " + changedValue);
-
-                    //componentFieldInfo.SetValue(componentField, changedValue);
-
-                    //component.GetType()
-                    //    .GetField(variableData.Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.SetProperty)
-                    //    .SetValue(componentVariable, changedVariable);
-                    
-
-
+                {                    
+                    var componentField = component.GetType().GetField(variableData.Key, bindingFlags);                                       
+                    componentField.SetValue(component, JsonConvert.DeserializeObject(variableData.Value, componentField.FieldType));
 
                 }
-
-                #region OLD
-
-                //foreach (KeyValuePair<string, string> variable in currentState[component.Key]) //foreach variable in the current state at the key "character movement"
-                //{
-                //    string statusVariableName = variable.Key;
-                //    //string statusVariableValue = variable.Value;
-
-
-
-                //    //FieldInfo statusVariableInfo = statusVariableValue.GetType().GetField(statusVariableName, BindingFlags.NonPublic | BindingFlags.Instance);                                        
-                //    FieldInfo componentVariableInfo = componentOfRealObject.GetType().GetField(statusVariableName, BindingFlags.NonPublic | BindingFlags.Instance);
-
-
-                //    //var thing = componentVariableInfo.GetValue(componentOfRealObject.);
-                //    var thing = componentVariableInfo.GetValue(componentOfRealObject);
-                //    //Type componentVariableType = ;
-
-                //    print(thing);
-                //    //print(componentVariableInfo.FieldType);
-                //    //print(componentVariableInfo.FieldHandle);
-                //    //print(componentVariableInfo.);
-
-                //    //object componentVariableValue = componentVariableInfo.GetValue(componentVariableType);
-
-                //    //print(componentVariableValue);
-
-                //    //print("statusVariableName: " + statusVariableName);
-                //    //print("statusVariableValue: "+ statusVariableValue);                    
-
-                //    //print(statusVariableInfo.Name + ": " + statusVariableInfo.FieldType);
-                //    //print(componentVariableInfo.Name + ": " + componentVariableInfo.FieldType);
-
-
-
-
-
-
-                //    //componentVariableInfo.SetValue(statusVariableName, statusVariableValue);
-
-
-
-
-
-                //    //TypeCode valueTypeCode = Type.GetTypeCode(componentOfRealObject.GetType().GetField(variableName).FieldType);
-                //    //print("variableName: " + statusVariableName);
-                //    //print("variableValue: " + statusVariableValue);
-                //    //print("valueTypeCode: " + valueTypeCode);
-                //    //var variableInfo = JsonConvert.DeserializeAnonymousType(variableValue, componentOfRealObject.GetType().GetField(variableName));
-                //}
-
-                #endregion
             }
         }
         else
