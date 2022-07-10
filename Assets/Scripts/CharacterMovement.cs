@@ -28,20 +28,14 @@ public class CharacterMovement : MonoBehaviour
         #endregion
 
         #region GATHERING RULE-BOUND INPUTS
-        
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            movementState.SetState("walking");
-            print(currentHorizontalSpeed);
-        }
 
         if (controller.isGrounded)
         {            
             if (Input.GetKeyDown(KeyCode.C))
             {
-                if (movementState.currentState != movementState.potentialStates["crouching"])
+                if (movementState.currentState != movementState.potentialStates["sneaking"])
                 {
-                    movementState.SetState("crouching");                    
+                    movementState.SetState("sneaking");                    
                 }
                 else
                 {
