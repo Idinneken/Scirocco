@@ -524,7 +524,7 @@ MonoBehaviour:
       Data: currentHorizontalSpeed
     - Name: $v
       Entry: 1
-      Data: 12
+      Data: runSpeed
     - Name: 
       Entry: 8
       Data: 
@@ -643,10 +643,10 @@ MonoBehaviour:
     m_Bits: 64
   squatting: 0
   walkSpeed: 0
-  runSpeed: 0
+  runSpeed: 3000
   crouchSpeed: 0
   slideSpeed: 0
-  jumpHeight: 0
+  jumpHeight: 2
   gravity: -10
 --- !u!1 &698305934
 GameObject:
