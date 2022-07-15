@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
@@ -12,7 +10,6 @@ public class CharacterMovement : MonoBehaviour
     float currentHorizontalSpeed, verticalSpeed = 0f;    
     public bool squatting;    
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
-    internal bool walkCondition, runCondition, crouchCondition, slideCondition;
 
     //Global
     public float gravity = -10f;
@@ -22,65 +19,56 @@ public class CharacterMovement : MonoBehaviour
         #region GATHERING FREE INPUTS
 
         float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
-        bool jump = Input.GetButtonDown("Jump");
+        float z = Input.GetAxisRaw("Vertical");        
 
-        #endregion
-
-        #region GATHERING RULE-BOUND INPUTS
+        #endregion        
 
         if (controller.isGrounded)
         {            
             if (Input.GetKeyDown(KeyCode.C))
             {
-                if (movementState.currentState != movementState.potentialStates["sneaking"])
-                {
-                    movementState.SetState("sneaking");                    
-                }
-                else
-                {
-                    movementState.SetState("walking");
-                }
+                movementState.ToggleBetweenStates("sneaking", "walking");
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if (movementState.currentState != movementState.potentialStates["running"])
-                {
-                    movementState.SetState("running");
-                }
-                else
-                {
-                    movementState.SetState("walking");
-                }
+                movementState.ToggleBetweenStates("running", "walking");
+            }
+            
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
             }
         }                        
-        #endregion
+                
+        Movement(x, z);
+        
+    }    
 
-        Vector3 strafeAmount = transform.right * x; //Left + Right
-        Vector3 forwardAmount = transform.forward * z; //Forward + Back
-        Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
-        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed
-
-        #region JUMPING
-
+    private void Jump()
+    {
         if (controller.isGrounded)
         {
             verticalSpeed = 0f;
-            if (jump is true)
-            {
-                verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                
-            }
+            verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                            
         }
-        verticalSpeed += gravity * Time.deltaTime;
+        
+    }
 
-        #endregion
+    private void Movement(float x_, float z_)
+    {
+        verticalSpeed += gravity * Time.deltaTime; //Gravity? Who gives a crap about gravity?
+
+        Vector3 strafeAmount = transform.right * x_; //Left + Right
+        Vector3 forwardAmount = transform.forward * z_; //Forward + Back
+        Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
+        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed
 
         Vector3 movement = AdjustVelocityToSlope(new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z));
         controller.Move(movement);
     }
-    
-    public Vector3 AdjustVelocityToSlope(Vector3 velocity_)
+
+    private Vector3 AdjustVelocityToSlope(Vector3 velocity_)
     {
         var ray = new Ray(transform.position, Vector3.down); //Cast a ray to the floor
 

@@ -2,17 +2,16 @@ using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.VisualBasic;
 using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour
 {    
-    public string stateType, initialStateName;
-    public Dictionary<string, Dictionary<string, string>> currentState = new();
+    public string stateType, initialStateName, currentStateName, previousStateName;
+    internal Dictionary<string, Dictionary<string, string>> currentState = new();
     public Dictionary<string, Dictionary<string, Dictionary<string, string>>> potentialStates = new();
     
     void Start()
-    {        
+    {                
         if (potentialStates.ContainsKey(initialStateName))
         {
             currentState = potentialStates[initialStateName];
@@ -34,68 +33,82 @@ public class EntityState : SerializedMonoBehaviour
 
     public void SetState(string stateName_)
     {
-        const System.Reflection.BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
-        
+        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
+        previousStateName = currentStateName;
+        currentStateName = stateName_;
+
         if (potentialStates.ContainsKey(stateName_)) //if potentialStates.ContainsKey("walking")
         {            
             currentState = potentialStates[stateName_]; //currentState = potentialStates["walking"]
                                                         
             foreach (KeyValuePair<string, Dictionary<string,string>> stateComponentData in currentState) //foreach component in the current state
             {       
-                Component component = gameObject.GetComponent(stateComponentData.Key);                    
+                if(gameObject.GetComponent(stateComponentData.Key))
+                {
+                    Component component = gameObject.GetComponent(stateComponentData.Key);                    
                          
-                foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
-                {                                        
-                    SetComponentVariable(component, stateVariableDatom, bindingFlags);                    
+                    foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
+                    {                                                            
+                        SetComponentVariable(component, stateVariableDatom, bindingFlags);                    
+                    }
+                }
+                else
+                {
+                    print("'" + stateComponentData.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
                 }
             }
-
         }
         else
         {
-            print(stateName_ + " not found in the statetype: " + stateType);
+            print("'" + stateName_ + "' not found on '" + gameObject.name + "' '" + stateType + "'");
             return;
         }           
     }
 
-    public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    public void ToggleBetweenStates(string firstStateName_, string secondStateName_)
     {
-        // var fieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_);
-        // var fieldBeingTakenFrom = component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_);
+        if (currentStateName != firstStateName_ && currentStateName != secondStateName_)
+        {
+            SetState(firstStateName_);
+        }
+        else if (currentStateName == firstStateName_)
+        {
+            SetState(secondStateName_);
+        }
+        else if (currentStateName == secondStateName_)
+        {
+            SetState(firstStateName_);
+        }
         
-        object gobject = component_.gameObject;
-        FieldInfo infoOfFieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_);        
-        FieldInfo infoOfFieldBeingTakenFrom = component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_);
-        
-        object valueOfFieldBeingSet = infoOfFieldBeingSet.GetValue(component_); 
-        object valueOfFieldBeingTakenFrom = null;
-
-        if (infoOfFieldBeingTakenFrom != null)
-        {
-            valueOfFieldBeingTakenFrom = infoOfFieldBeingTakenFrom.GetValue(gobject);
-        }
-                       
-        if (valueOfFieldBeingTakenFrom != null /* && valueOfFieldBeingTakenFrom.GetType() == valueOfFieldBeingSet.GetType()*/) //If it's being set to a variable that already exists.
-        {
-            infoOfFieldBeingSet.SetValue(component_, valueOfFieldBeingTakenFrom);
-        }
-        else
-        {
-            infoOfFieldBeingSet.SetValue(component_, JsonConvert.DeserializeObject(stateVariableDatom_.Value, valueOfFieldBeingSet.GetType()));
-        }
-
-
-        // if (fieldBeingTakenFrom != null && fieldBeingTakenFrom.GetType() == fieldBeingSet.GetType()) 
-        // {                                                            
-        //     print(fieldBeingTakenFrom);
-        //     print(fieldBeingTakenFrom.GetValue(null));
-        //     // fieldBeingSet.SetValue(component_, fieldBeingTakenFrom.GetType().GetField().GetValue());
-        //     fieldBeingSet.SetValue(component_, fieldBeingTakenFrom.GetValue(null));
-        // }
-        // else
-        // {
-        //     fieldBeingSet.SetValue(component_, JsonConvert.DeserializeObject(stateVariableDatom_.Value, fieldBeingSet.FieldType));
-        // }   
     }
 
+    public void ToggleState()
+    {
+        SetState(previousStateName);
+    }
+
+        
+
+    public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    {        
+        FieldInfo infoOfFieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_) ?? null; //Get Info for the field that's being set
+        FieldInfo infoOfFieldBeingTakenFrom = component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_) ?? null; //Get Info for the field that's being potentially being taken from
+
+        if (infoOfFieldBeingSet == null)
+        {
+            print("'" + stateVariableDatom_.Key + "' not found on '" + gameObject.name + "' '" + component_.name + "'");
+        } 
+        
+        var valueOfFieldBeingSet = infoOfFieldBeingSet.GetValue(component_);
+        var valueOfFieldBeingTakenFrom = infoOfFieldBeingTakenFrom?.GetValue(component_);        
+
+        if (infoOfFieldBeingTakenFrom != null) //If it's being set to a variable that already exists
+        {                        
+            infoOfFieldBeingSet.SetValue(component_, valueOfFieldBeingTakenFrom);
+        }
+        else //If it's not being set to a variable that already exists
+        {
+            infoOfFieldBeingSet.SetValue(component_, JsonConvert.DeserializeObject(stateVariableDatom_.Value, valueOfFieldBeingSet.GetType()));
+        } 
+    }
 }
