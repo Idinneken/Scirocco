@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour
 {    
+    //features to add potentially: JSON deserialisation, defaulting to default variable value, SendMessage/Invoke if a method is found
+
     public string stateType, initialStateName, currentStateName, previousStateName;
     internal Dictionary<string, Dictionary<string, string>> currentState = new();
     public Dictionary<string, Dictionary<string, Dictionary<string, string>>> potentialStates = new();
