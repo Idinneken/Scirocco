@@ -10,6 +10,8 @@ public class CharacterMovement : MonoBehaviour
     float currentHorizontalSpeed, verticalSpeed = 0f;    
     public bool squatting;    
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
+    public float crouchHeight;
+    float initialCrouchHeight;
 
     //Global
     public float gravity = -10f;
@@ -45,14 +47,33 @@ public class CharacterMovement : MonoBehaviour
         
     }    
 
-    private void Jump()
+    private void Ping()
     {
-        if (controller.isGrounded)
-        {
-            verticalSpeed = 0f;
-            verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                            
-        }
+        print("Ping has been invoked!");
+    }
+
+    // private void Ping(object valueToPrint_)
+    // {
+    //     print("Ping has been invoked! " + valueToPrint_);
+    // }
+
+    // private void Crouch()
+    // {
+    //     if(!squatting)
+    //     {
+    //         controller.height = crouchHeight;
+    //     }
+    //     else
+    //     {
+    //         controller.height
+    //     }
         
+    // }
+
+    private void Jump()
+    {        
+        verticalSpeed = 0f;
+        verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                                        
     }
 
     private void Movement(float x_, float z_)
@@ -64,7 +85,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
         Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed
 
-        Vector3 movement = AdjustVelocityToSlope(new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z));
+        Vector3 movement = /*AdjustVelocityToSlope(*/new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z)/*)*/;
         controller.Move(movement);
     }
 
@@ -74,10 +95,11 @@ public class CharacterMovement : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 0.2f)) //If the ray hits
         {
-            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal); //Get the rotation of the slope 
+            var slopeRotation = Quaternion.FromToRotation(Vector3.up, hit.normal); //Get the rotation of the slope             
             var adjustedVelocity = slopeRotation * velocity_; //Adjusted velocity = Rotation of the slope * the velocity
             if (adjustedVelocity.y < 0) //If the y of the velocity is less than 0 (if going down the slope)
             {
+                // print(adjustedVelocity);
                 return adjustedVelocity; //Return the calculated velocity
             }
         }

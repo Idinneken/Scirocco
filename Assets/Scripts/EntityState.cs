@@ -1,12 +1,14 @@
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour
 {    
-    //features to add potentially: JSON deserialisation, defaulting to default variable value, SendMessage/Invoke if a method is found
+    //features to add potentially: JSON deserialisation, defaulting to default variable value
 
     public string stateType, initialStateName, currentStateName, previousStateName;
     internal Dictionary<string, Dictionary<string, string>> currentState = new();
@@ -33,40 +35,6 @@ public class EntityState : SerializedMonoBehaviour
         }
     }
 
-    public void SetState(string stateName_)
-    {
-        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty);
-        previousStateName = currentStateName;
-        currentStateName = stateName_;
-
-        if (potentialStates.ContainsKey(stateName_)) //if potentialStates.ContainsKey("walking")
-        {            
-            currentState = potentialStates[stateName_]; //currentState = potentialStates["walking"]
-                                                        
-            foreach (KeyValuePair<string, Dictionary<string,string>> stateComponentData in currentState) //foreach component in the current state
-            {       
-                if(gameObject.GetComponent(stateComponentData.Key))
-                {
-                    Component component = gameObject.GetComponent(stateComponentData.Key);                    
-                         
-                    foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
-                    {                                                            
-                        SetComponentVariable(component, stateVariableDatom, bindingFlags);                    
-                    }
-                }
-                else
-                {
-                    print("'" + stateComponentData.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
-                }
-            }
-        }
-        else
-        {
-            print("'" + stateName_ + "' not found on '" + gameObject.name + "' '" + stateType + "'");
-            return;
-        }           
-    }
-
     public void ToggleBetweenStates(string firstStateName_, string secondStateName_)
     {
         if (currentStateName != firstStateName_ && currentStateName != secondStateName_)
@@ -89,7 +57,73 @@ public class EntityState : SerializedMonoBehaviour
         SetState(previousStateName);
     }
 
+    public void SetState(string stateName_)
+    {
+        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty |BindingFlags.InvokeMethod);
+        previousStateName = currentStateName;
+        currentStateName = stateName_;
+
+        if (potentialStates.ContainsKey(stateName_)) //if potentialStates.ContainsKey("walking")
+        {            
+            currentState = potentialStates[stateName_]; //currentState = potentialStates["walking"]
+                                                        
+            foreach (KeyValuePair<string, Dictionary<string,string>> stateComponentData in currentState) //foreach component in the current state
+            {       
+                if(gameObject.GetComponent(stateComponentData.Key))
+                {
+                    Component component = gameObject.GetComponent(stateComponentData.Key);                    
+                         
+                    foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
+                    {                                                            
+                        DetermineAction(component, stateVariableDatom, bindingFlags);
+                        // SetComponentVariable(component, stateVariableDatom, bindingFlags);                    
+                    }
+                }
+                else
+                {
+                    print("'" + stateComponentData.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
+                }
+            }
+        }
+        else
+        {
+            print("'" + stateName_ + "' not found on '" + gameObject.name + "' '" + stateType + "'");
+            return;
+        }           
+    }
+
+    public void DetermineAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    {
+        var type = component_.GetType();
+
         
+        if (type.GetMethod(stateVariableDatom_.Key, bindingFlags_) != null)
+        {
+            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingksFlags_, null, CallingConventions.Standard, Type.EmptyTypes);
+            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
+            
+            object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value, typeof(Array));             
+            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, values.Count(), bindingFlags_, null, Type.EmptyTypes, null);
+            MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
+
+            ParameterInfo[] attributeTypes = infoOfMethodBeingInvoked.GetParameters();            
+          
+            if (values != null)
+            {
+                // object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value);
+                infoOfMethodBeingInvoked.Invoke(gameObject, values);                  
+            }          
+            else
+            {
+                infoOfMethodBeingInvoked.Invoke(component_, null);                  
+            }
+        }
+        else
+        {
+            SetComponentVariable(component_, stateVariableDatom_, bindingFlags_);
+        }
+        
+    }  
 
     public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
     {        
@@ -98,7 +132,7 @@ public class EntityState : SerializedMonoBehaviour
 
         if (infoOfFieldBeingSet == null)
         {
-            print("'" + stateVariableDatom_.Key + "' not found on '" + gameObject.name + "' '" + component_.name + "'");
+            print("'" + stateVariableDatom_.Key + "' not found on '" + gameObject.name + "' '" + component_.GetType() + "'");
         } 
         
         var valueOfFieldBeingSet = infoOfFieldBeingSet.GetValue(component_);
