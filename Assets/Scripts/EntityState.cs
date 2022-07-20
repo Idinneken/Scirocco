@@ -59,7 +59,7 @@ public class EntityState : SerializedMonoBehaviour
 
     public void SetState(string stateName_)
     {
-        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty |BindingFlags.InvokeMethod);
+        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);
         previousStateName = currentStateName;
         currentStateName = stateName_;
 
@@ -75,8 +75,7 @@ public class EntityState : SerializedMonoBehaviour
                          
                     foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
                     {                                                            
-                        DetermineAction(component, stateVariableDatom, bindingFlags);
-                        // SetComponentVariable(component, stateVariableDatom, bindingFlags);                    
+                        DetermineandApplyAction(component, stateVariableDatom, bindingFlags);                        
                     }
                 }
                 else
@@ -92,59 +91,52 @@ public class EntityState : SerializedMonoBehaviour
         }           
     }
 
-    public void DetermineAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
-    {
-        var type = component_.GetType();
-
-        
-        if (type.GetMethod(stateVariableDatom_.Key, bindingFlags_) != null)
+    public void DetermineandApplyAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    {               
+        if (component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_) != null)
         {
-            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingksFlags_, null, CallingConventions.Standard, Type.EmptyTypes);
-            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
-            
-            object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value, typeof(Array));             
-            // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, values.Count(), bindingFlags_, null, Type.EmptyTypes, null);
-            MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
-
-            ParameterInfo[] attributeTypes = infoOfMethodBeingInvoked.GetParameters();            
-          
-            if (values != null)
-            {
-                // object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value);
-                infoOfMethodBeingInvoked.Invoke(gameObject, values);                  
-            }          
-            else
-            {
-                infoOfMethodBeingInvoked.Invoke(component_, null);                  
-            }
+            InvokeComponentMethod(component_, stateVariableDatom_, bindingFlags_);
         }
-        else
-        {
+        else if (component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_) == null)
+        {            
             SetComponentVariable(component_, stateVariableDatom_, bindingFlags_);
+        }        
+        else if (component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_) != null)
+        {
+            EquateComponentVariable(component_, stateVariableDatom_, bindingFlags_);
         }
-        
     }  
+
+    public void InvokeComponentMethod(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    {
+        object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value, typeof(Array));                     
+        MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
+        // ParameterInfo[] attributeTypes = infoOfMethodBeingInvoked.GetParameters();            
+        
+        infoOfMethodBeingInvoked.Invoke(component_, values);  
+    }
 
     public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
     {        
-        FieldInfo infoOfFieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_) ?? null; //Get Info for the field that's being set
-        FieldInfo infoOfFieldBeingTakenFrom = component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_) ?? null; //Get Info for the field that's being potentially being taken from
+        FieldInfo infoOfFieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_) ?? null; //Get Info for the field that's being set        
 
-        if (infoOfFieldBeingSet == null)
-        {
+        if (infoOfFieldBeingSet == null){
             print("'" + stateVariableDatom_.Key + "' not found on '" + gameObject.name + "' '" + component_.GetType() + "'");
         } 
         
-        var valueOfFieldBeingSet = infoOfFieldBeingSet.GetValue(component_);
-        var valueOfFieldBeingTakenFrom = infoOfFieldBeingTakenFrom?.GetValue(component_);        
+        infoOfFieldBeingSet.SetValue(component_, JsonConvert.DeserializeObject(stateVariableDatom_.Value, infoOfFieldBeingSet.GetValue(component_).GetType()));        
+    }
 
-        if (infoOfFieldBeingTakenFrom != null) //If it's being set to a variable that already exists
-        {                        
-            infoOfFieldBeingSet.SetValue(component_, valueOfFieldBeingTakenFrom);
-        }
-        else //If it's not being set to a variable that already exists
-        {
-            infoOfFieldBeingSet.SetValue(component_, JsonConvert.DeserializeObject(stateVariableDatom_.Value, valueOfFieldBeingSet.GetType()));
-        } 
+    public void EquateComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    {
+        FieldInfo infoOfFieldBeingSet = component_.GetType().GetField(stateVariableDatom_.Key, bindingFlags_) ?? null; //Get Info for the field that's being set
+        FieldInfo infoOfFieldBeingTakenFrom = component_.GetType().GetField(stateVariableDatom_.Value, bindingFlags_) ?? null; //Get Info for the field that's being potentially being taken from
+
+        if (infoOfFieldBeingSet == null){
+            print("'" + stateVariableDatom_.Key + "' not found on '" + gameObject.name + "' '" + component_.GetType() + "'");
+        }                            
+
+        infoOfFieldBeingSet.SetValue(component_, infoOfFieldBeingTakenFrom?.GetValue(component_));
+    
     }
 }
