@@ -47,10 +47,10 @@ public class CharacterMovement : MonoBehaviour
         
     }    
 
-    // private void Ping()
-    // {
-    //     print("Ping has been invoked!");
-    // }
+    private void Ping()
+    {
+        print("Ping has been invoked!");
+    }
 
     private void Ping(string message_)
     {
