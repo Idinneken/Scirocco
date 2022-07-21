@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+// using ExtensionMethods;
 using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour
@@ -92,8 +93,8 @@ public class EntityState : SerializedMonoBehaviour
     }
 
     public void DetermineandApplyAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
-    {               
-        if (component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_) != null)
+    {       
+        if (component_.GetType().HasMethod_(stateVariableDatom_.Key, bindingFlags_))
         {
             InvokeComponentMethod(component_, stateVariableDatom_, bindingFlags_);
         }
@@ -108,12 +109,54 @@ public class EntityState : SerializedMonoBehaviour
     }  
 
     public void InvokeComponentMethod(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
-    {
-        object[] values = (object[])JsonConvert.DeserializeObject(stateVariableDatom_.Value, typeof(Array));                     
-        MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
-        // ParameterInfo[] attributeTypes = infoOfMethodBeingInvoked.GetParameters();            
+    {                              
+        var parameters = JsonConvert.DeserializeObject<Dictionary<string, object>>(stateVariableDatom_.Value);
+
+        List<Type> parameterTypes = new();
+
+        // print(parameters["message_"]);
         
-        infoOfMethodBeingInvoked.Invoke(component_, values);  
+        foreach(object arg in parameters.Values)
+        {
+            parameterTypes.Add(arg.GetType());
+            // print(arg.GetType());
+            
+
+        }
+        
+        print (parameterTypes[0]);
+        //  = arguments.Values.ToList().Get
+
+        // print(component_.GetType().GetMethod("Ping").GetParameters());
+
+        // print(stateVariableDatom_.Key);
+        print(parameterTypes[0]);
+        print (stateVariableDatom_.Key + " " + " bindingFlags_ null " + parameterTypes.ToArray() + " null");
+        // MethodInfo method = component_.GetType().GetMethod(stateVariableDatom_.Key, parameters.Count, bindingFlags_, null, parameterTypes.ToArray(), new List<ParameterModifier>().ToArray());
+        MethodInfo method = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_, null, parameterTypes.ToArray(), null);
+        // MethodInfo method = component_.GetType().GetMethod(stateVariableDatom_.Key, 
+        // print(method);
+        
+        // print (method.Name);
+        // print (method.Attributes);
+
+        method.Invoke(component_, bindingFlags_, null, parameters.Values.ToArray(), null);
+
+        // var values = JsonConvert.DeserializeObject<List<object>>(stateVariableDatom_.Value);
+        
+        // foreach (object ob in values)
+        // {
+        //     print(ob);
+        //     print(ob.GetType());
+        // }   
+
+        // component_.GetType().InvokeMember(stateVariableDatom_.Key, bindingFlags_, null, component_, argumentValues.Values.ToArray(), null, null, argumentValues.Keys.ToArray());      
+        
+        // MethodInfo infoOfMethodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_);
+        // // ParameterInfo[] attributeTypes = infoOfMethodBeingInvoked.GetParameters();            
+        
+        // infoOfMethodBeingInvoked.Invoke(component_, bindingFlags_, null, values.ToArray(), null);
+        // infoOfMethodBeingInvoked.InvokeMember()
     }
 
     public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)

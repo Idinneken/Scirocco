@@ -144,7 +144,7 @@ namespace VSCodeEditor
         const string k_ToolsVersion = "4.0";
         const string k_ProductVersion = "10.0.20506";
         const string k_BaseDirectory = ".";
-        const string k_TargetFrameworkVersion = "v4.7.1";
+        const string k_TargetFrameworkVersion = "v4.8";
         public ProjectGeneration(string tempDirectory)
             : this(tempDirectory, new AssemblyNameProvider(), new FileIOProvider(), new GUIDProvider()) { }
 
