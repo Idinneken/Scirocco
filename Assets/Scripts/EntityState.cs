@@ -9,9 +9,12 @@ using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour
 {    
-    //features to add potentially: JSON deserialisation, defaulting to default variable value
+    //features to add potentially: JSON deserialisation, defaulting to default variable value.
+    
+    // IDEA: FOR DEFAULTING TO DEFAULT VARIABLE VALUE, HAVE A DICTIONARY WHICH CONTAINS THE DEFAULT VALUES FOR THINGS
+    // THEN APPLY ALL IN THAT DICTIONARY EXCEPT ONES WHICH ARE OVERRIDEN BY THE NEWLY SET DICTIONARY
 
-    public string stateType, initialStateName, currentStateName, previousStateName;
+    public string stateType, initialStateName, stateName, previousStateName;
     internal Dictionary<string, Dictionary<string, string>> currentState = new();
     public Dictionary<string, Dictionary<string, Dictionary<string, string>>> potentialStates = new();
     
@@ -38,15 +41,15 @@ public class EntityState : SerializedMonoBehaviour
 
     public void ToggleBetweenStates(string firstStateName_, string secondStateName_)
     {
-        if (currentStateName != firstStateName_ && currentStateName != secondStateName_)
+        if (stateName != firstStateName_ && stateName != secondStateName_)
         {
             SetState(firstStateName_);
         }
-        else if (currentStateName == firstStateName_)
+        else if (stateName == firstStateName_)
         {
             SetState(secondStateName_);
         }
-        else if (currentStateName == secondStateName_)
+        else if (stateName == secondStateName_)
         {
             SetState(firstStateName_);
         }
@@ -60,10 +63,10 @@ public class EntityState : SerializedMonoBehaviour
 
     public void SetState(string stateName_)
     {
-        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);
-        previousStateName = currentStateName;
-        currentStateName = stateName_;
+        previousStateName = stateName;
+        stateName = stateName_;  
 
+        const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);                
         if (potentialStates.ContainsKey(stateName_)) //if potentialStates.ContainsKey("walking")
         {            
             currentState = potentialStates[stateName_]; //currentState = potentialStates["walking"]
@@ -76,7 +79,7 @@ public class EntityState : SerializedMonoBehaviour
                          
                     foreach (KeyValuePair<string, string> stateVariableDatom in currentState[stateComponentData.Key]) //foreach variable in the current state at the key "character movement"
                     {                                                            
-                        DetermineandApplyAction(component, stateVariableDatom, bindingFlags);                        
+                        DetermineAndApplyAction(component, stateVariableDatom, bindingFlags);                        
                     }
                 }
                 else
@@ -89,11 +92,14 @@ public class EntityState : SerializedMonoBehaviour
         {
             print("'" + stateName_ + "' not found on '" + gameObject.name + "' '" + stateType + "'");
             return;
-        }           
+        }         
+        
+        
     }
 
-    public void DetermineandApplyAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
+    public void DetermineAndApplyAction(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
     {       
+        // print(component_.GetType().HasMethod_("ToggleCrouch", bindingFlags_));
         if (component_.GetType().HasMethod_(stateVariableDatom_.Key, bindingFlags_))
         {
             InvokeComponentMethod(component_, stateVariableDatom_, bindingFlags_);
@@ -110,16 +116,27 @@ public class EntityState : SerializedMonoBehaviour
 
     public void InvokeComponentMethod(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)
     {                              
-        var parameters = JsonConvert.DeserializeObject<List<object>>(stateVariableDatom_.Value);
+        List<object> parameters = new();
         List<Type> parameterTypes = new();
-                
-        foreach(object arg in parameters)
-        {
-            parameterTypes.Add(arg.GetType());
-        }
         
+        // print("here");
+
+        if (stateVariableDatom_.Value != null)
+        {
+            parameters = JsonConvert.DeserializeObject<List<object>>(stateVariableDatom_.Value);
+            
+            foreach(object arg in parameters)
+            {
+                parameterTypes.Add(arg.GetType());
+            }
+        }
+        else
+        {
+            parameters = null;
+        }
+           
         MethodInfo methodBeingInvoked = component_.GetType().GetMethod(stateVariableDatom_.Key, bindingFlags_, null, parameterTypes.ToArray(), null);
-        methodBeingInvoked.Invoke(component_, bindingFlags_, null, parameters.ToArray(), null);
+        methodBeingInvoked.Invoke(component_, bindingFlags_, null, parameters?.ToArray(), null);
     }
 
     public void SetComponentVariable(Component component_, KeyValuePair<string, string> stateVariableDatom_, BindingFlags bindingFlags_)

@@ -262,11 +262,28 @@ PrefabInstance:
       objectReference: {fileID: 8730355085803973916, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
     - target: {fileID: 8730355085803973916, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730355085803973916, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"potentialStates.{\"running\"}.{\"CharacterMovement\"}","add_keys":null,"remove_keys":{"$id":0,"$type":"System.Object[],
+        mscorlib","$rlength":1,"$rcontent":[{"$id":1,"$type":"System.String, mscorlib","Ping"}]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730355085803973916, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"potentialStates.{\"running\"}.{\"CharacterMovement\"}.{\"Ping\"}","value":null'
       objectReference: {fileID: 0}
     - target: {fileID: 8730355085803973916, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730355085803973917, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: crouchingCameraHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730355085803973917, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: crouchingColliderHeight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}

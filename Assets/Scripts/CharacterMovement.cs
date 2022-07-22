@@ -10,11 +10,32 @@ public class CharacterMovement : MonoBehaviour
     float currentHorizontalSpeed, verticalSpeed = 0f;    
     public bool squatting;    
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
-    public float crouchHeight;
-    float initialCrouchHeight;
-
+    public float crouchingColliderHeight, crouchingCameraHeight;
+    
+    internal float walkingColliderHeight, walkingCameraHeight;
+    
     //Global
     public float gravity = -10f;
+
+    void Awake()
+    {
+        print("cameraLocalheight" + GetComponentInChildren<Camera>().transform.localPosition);
+        print("cameraheight" + GetComponentInChildren<Camera>().transform.position);
+        walkingCameraHeight = GetComponentInChildren<Camera>().transform.localPosition.y;
+    }
+
+    void Start()
+    {
+        // print(controller.height);
+        // walkingColliderHeight = controller.height;     
+        // print("controller height: " + controller.height);
+        // print("Collider height: " + walkingColliderHeight);
+        // print(walkingColliderHeight);
+
+        
+
+        // print(walkingCameraHeight);
+    }
 
     void Update()
     {
@@ -29,7 +50,7 @@ public class CharacterMovement : MonoBehaviour
         {            
             if (Input.GetKeyDown(KeyCode.C))
             {
-                movementState.ToggleBetweenStates("sneaking", "walking");
+                movementState.ToggleBetweenStates("crouching", "walking");
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -47,33 +68,27 @@ public class CharacterMovement : MonoBehaviour
         
     }    
 
-    private void Ping()
-    {
-        print("Ping has been invoked!");
-    }
+    private void ToggleCrouch()
+    {        
+        Camera camera = GetComponentInChildren<Camera>();
+        Vector3 cameraPosition = camera.transform.localPosition;        
 
-    private void Ping(string message_)
-    {
-        print("Ping has been invoked! " + message_);
-    }
+        // print(movementState.stateName);
 
-    // private void Ping(object valueToPrint_)
-    // {
-    //     print("Ping has been invoked! " + valueToPrint_);
-    // }
-
-    // private void Crouch()
-    // {
-    //     if(!squatting)
-    //     {
-    //         controller.height = crouchHeight;
-    //     }
-    //     else
-    //     {
-    //         controller.height
-    //     }
+        if (movementState.stateName != "crouching")
+        {   
+            // controller.height = walkingColliderHeight;
+            // print(cameraPosition);
+            // print(camera.transform.position);
+            camera.transform.localPosition = new Vector3(cameraPosition.x, walkingCameraHeight, cameraPosition.z);
+        }
+        else //statename == crouching
+        {
+            // controller.height = crouchingColliderHeight;
+            camera.transform.localPosition = new Vector3(cameraPosition.x, crouchingCameraHeight, cameraPosition.z);
+        }
         
-    // }
+    }
 
     private void Jump()
     {        

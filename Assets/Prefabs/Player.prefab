@@ -80,7 +80,8 @@ MonoBehaviour:
   crouchSpeed: 3
   slideSpeed: 0
   jumpHeight: 2
-  crouchHeight: 0
+  crouchingColliderHeight: 1
+  crouchingCameraHeight: 0
   gravity: -10
 --- !u!114 &8730355085803973918
 MonoBehaviour:
