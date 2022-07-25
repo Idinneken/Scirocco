@@ -19,8 +19,8 @@ public class CharacterMovement : MonoBehaviour
 
     void Awake()
     {
-        print("cameraLocalheight" + GetComponentInChildren<Camera>().transform.localPosition);
-        print("cameraheight" + GetComponentInChildren<Camera>().transform.position);
+        // print("cameraLocalheight" + GetComponentInChildren<Camera>().transform.localPosition);
+        // print("cameraheight" + GetComponentInChildren<Camera>().transform.position);
         walkingCameraHeight = GetComponentInChildren<Camera>().transform.localPosition.y;
     }
 
@@ -68,27 +68,19 @@ public class CharacterMovement : MonoBehaviour
         
     }    
 
-    private void ToggleCrouch()
-    {        
+    private void Crouch()
+    {
         Camera camera = GetComponentInChildren<Camera>();
-        Vector3 cameraPosition = camera.transform.localPosition;        
+        Vector3 cameraPosition = camera.transform.localPosition;      
+        camera.transform.localPosition = new Vector3(cameraPosition.x, crouchingCameraHeight, cameraPosition.z);
+    }    
 
-        // print(movementState.stateName);
-
-        if (movementState.stateName != "crouching")
-        {   
-            // controller.height = walkingColliderHeight;
-            // print(cameraPosition);
-            // print(camera.transform.position);
-            camera.transform.localPosition = new Vector3(cameraPosition.x, walkingCameraHeight, cameraPosition.z);
-        }
-        else //statename == crouching
-        {
-            // controller.height = crouchingColliderHeight;
-            camera.transform.localPosition = new Vector3(cameraPosition.x, crouchingCameraHeight, cameraPosition.z);
-        }
-        
-    }
+    private void UnCrouch()
+    {
+        Camera camera = GetComponentInChildren<Camera>();
+        Vector3 cameraPosition = camera.transform.localPosition;      
+        camera.transform.localPosition = new Vector3(cameraPosition.x, walkingCameraHeight, cameraPosition.z);
+    }    
 
     private void Jump()
     {        
