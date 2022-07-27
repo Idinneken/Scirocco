@@ -53,19 +53,19 @@ public class EntityState : SerializedMonoBehaviour
             {
                 previousState = currentState;
                 previousStateName = currentStateName;                                
-                if (previousState.outgoingDescription?.values != null)                
-                {                    
-                    IterateData(previousStateName, previousState.outgoingDescription, bindingFlags);
-                }                
+                // if (previousState.outgoingDescriptions?.values != null)                
+                // {                    
+                //     IterateData(previousStateName, previousState.outgoingDescriptions, bindingFlags);
+                // }                
             }                                                                  
                             
             currentState = states[stateName_];
             currentStateName = stateName_;
 
-            if(currentState.ingoingDescription?.values != null)
-            {                
-                IterateData(currentStateName, currentState.ingoingDescription, bindingFlags);              
-            }            
+            // if(currentState.ingoingDescriptions?.values != null)
+            // {                
+            //     IterateData(currentStateName, currentState.ingoingDescriptions, bindingFlags);              
+            // }            
             previousState ??= new State();        
         }
         else
@@ -99,24 +99,44 @@ public class EntityState : SerializedMonoBehaviour
     #endregion
     
     #region Component Data Application  
-    public void IterateData(string stateName_, ComponentVariableDescription compCollection_, BindingFlags bindingFlags_) 
-    {                
-        foreach (KeyValuePair<string, ActionCollection> componentType in compCollection_.values) //foreach component in the current collection
-        {      
-            Component component = GetComponent(componentType.Key);
+    public void IterateData(State state_, bool iterateThroughIngoingData_, BindingFlags bindingFlags_) 
+    {            
+        Dictionary<string, ComponentDescription> descriptions;
 
-            if (component != null)
-            {            
-                foreach (KeyValuePair<string, string> action in compCollection_.values[componentType.Key].values)
-                {
-                    invoker.DetermineAndApplyAction(component, component, action.Key, action.Value);
-                }
-            }
-            else
-            {
-                print("'" + componentType.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
-            }
+        if (iterateThroughIngoingData_)
+        {
+            descriptions = state_.ingoingDescriptions;
         }
+        else
+        {
+            descriptions = state_.outgoingDescriptions;
+        }
+
+        foreach (KeyValuePair<string, ComponentDescription> nameCompDescPair in descriptions)
+        {
+            Component component = GetComponent(nameCompDescPair.Key);
+            
+            if (component)
+            {
+                foreach (MemberDescription memberDesc in nameCompDescPair.Value.memberDescriptions) //foreach component in the current collection
+                {                    
+                    invoker.DetermineAndApplyAction(component, component, memberDesc.memberName, memberDesc.memberValue);
+                
+                    // foreach (KeyValuePair<string, string> action in compCollection_.values[componentType.Key].values)
+                    // {
+                    //     invoker.DetermineAndApplyAction(component, component, action.Key, action.Value);
+                    // }
+                }
+                // else
+                // {
+                //     print("'" + componentType.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
+                // }            
+            }
+
+            
+        }
+
+        
     }        
     
     #endregion

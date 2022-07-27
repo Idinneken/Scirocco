@@ -1,24 +1,24 @@
+using System;
 using System.Collections.Generic;
 
 public class NonMonoBehaviourClasses{}
 
 public class State{
-    public ComponentVariableDescription ingoingDescription, outgoingDescription;         
+    public Dictionary<string, ComponentDescription> ingoingDescriptions, outgoingDescriptions;         
     void Awake(){
-        ingoingDescription = new(); outgoingDescription = new ();
+        ingoingDescriptions = new(); outgoingDescriptions = new ();
     }    
 }
 
-public class ComponentVariableDescription{    
-    public Dictionary<string, ActionCollection> values;
+public class ComponentDescription{    
+    public List<MemberDescription> memberDescriptions;
     void Awake(){
-        values = new();
+        memberDescriptions = new();
     }
 }
 
-public struct ActionCollection{
-    public Dictionary<string, string> values;
-    void Awake(){
-        values = new();
-    }
+public struct MemberDescription{
+    // public Tuple<string, string> members;
+    public string memberName, memberValue;
+
 }

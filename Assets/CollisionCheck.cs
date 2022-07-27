@@ -1,20 +1,17 @@
 using System.Collections.Generic;
 using System.Reflection;
-using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class CollisionCheck : MonoBehaviour
+public class CollisionCheck : SerializedMonoBehaviour
 {
-    public Component componentBeingAltered;
-    public string variableOrMethodName;
-    public List<LayerMask> collidableLayers = new();                  
-    // public List<string> fieldsToTakeFromCollision = new();
-    public bool invokeOnEnter = true, invokeOnExit = false;  
-
-    public Dictionary<string, string> data = new();
-            
+    public List<LayerMask> collidableLayers = new();        
+    public string componentBeingAltered;                          
+    // public Dictionary<string, string> data = new();   
+    public List<ComponentDescription> data = new();            
     [Tooltip("Base available parameters for a collision: articulationBody, body, collider, contactCount, contacts, gameObject, impulse, relativeVelocity, rigidBody, transform")]        
 
+    public bool invokeOnEnter = true, invokeOnExit = false;  
     private List<object> fieldValues = new();
     private GenericInvoker invoker = new();    
     private Sourcer sourcer = new();
@@ -47,11 +44,11 @@ public class CollisionCheck : MonoBehaviour
     // }
     void GetFieldsAndApplyAction(Collider collider_)
     {
-        foreach (KeyValuePair<string, string> datom in data)
-        {                                                      
-            // FieldInfo infoOfFieldBeingTakenFrom = collider_.GetType().GetField(variableName_, bindingFlags)
-            invoker.DetermineAndApplyAction(componentBeingAltered, collider_, datom.Key, datom.Value);               
-        }
+        // foreach (KeyValuePair<string, string> datom in data)
+        // {                                                      
+        //     // FieldInfo infoOfFieldBeingTakenFrom = collider_.GetType().GetField(variableName_, bindingFlags)
+        //     invoker.DetermineAndApplyAction(componentBeingAltered, collider_, datom.Key, datom.Value);               
+        // }
                 
         
     }
