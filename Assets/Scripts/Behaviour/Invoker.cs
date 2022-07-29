@@ -4,29 +4,48 @@ using System.Reflection;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class GenericInvoker
+public class Invoker
 {
-    const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);
+    const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);    
 
-    public void DetermineAndApplyAction(object objectBeingAltered_, object objectBeingTakenFrom_, string variableOrMethodName_, string parameters_)
+    public void ApplyComponentDescriptions(Dictionary<string, ComponentDescription> componentDescriptions_, Component componentBeingTakenFrom_, GameObject gameObjectBeingAltered_)
+    {
+        if (componentDescriptions_ != null || componentDescriptions_ != default(Dictionary<string, ComponentDescription>))
+            foreach(KeyValuePair<string, ComponentDescription> stringCompPair in componentDescriptions_)
+            {                                                    
+                Component component = gameObjectBeingAltered_.GetComponent(stringCompPair.Key);
+                ApplyComponentDescription(stringCompPair.Value, component, componentBeingTakenFrom_ ?? component);
+            }       
+        else        
+        return;        
+    }
+    
+    public void ApplyComponentDescription(ComponentDescription componentDescription_, Component componentBeingAltered_, Component componentBeingTakenFrom_)
+    {                        
+        foreach (MemberDescription memberDesc in componentDescription_.memberDescriptions) 
+        {                    
+            DetermineAndApplyAction(componentBeingAltered_, componentBeingTakenFrom_, memberDesc.memberName, memberDesc.memberValue);                
+        }                          
+    }    
+    
+    public void DetermineAndApplyAction(Component componentBeingAltered_, Component componentBeingTakenFrom_, string variableOrMethodName_, string parameters_)
     {               
-        if (objectBeingAltered_.GetType().HasMethod_(variableOrMethodName_, bindingFlags)) //"if the object that's being changed has a method called *whatever*"
+        if (componentBeingAltered_.GetType().HasMethod_(variableOrMethodName_, bindingFlags)) //"if the object that's being changed has a method called *whatever*"        
         {
-            InvokeComponentMethod(objectBeingAltered_, variableOrMethodName_, parameters_);
-        }                
-        else if (objectBeingAltered_.GetType().GetField(parameters_) != null) //"if the object that's being changed has a field with the name of the parameter being set"
+            InvokeComponentMethod(componentBeingAltered_, variableOrMethodName_, parameters_);     
+        }      
+        else if (componentBeingAltered_.GetType().GetField(parameters_) != null) //"if the object that's being changed has a field with the name of the parameter being set"
         {
-            EquateComponentVariable(objectBeingAltered_, objectBeingAltered_, variableOrMethodName_, parameters_);
+            EquateComponentVariable(componentBeingAltered_, componentBeingAltered_, variableOrMethodName_, parameters_);
         }
-        else if (objectBeingAltered_.GetType().GetField(variableOrMethodName_) != null) //"if the object that's being changed has a field with the name of the field being changed"
-        {            
-            SetComponentVariable(objectBeingAltered_, variableOrMethodName_, parameters_);
-        }
-        else if (objectBeingTakenFrom_.GetType().GetField(parameters_) != null) //"if the object that's being taken from has a field with the name of the parameter being set"
+        else if (componentBeingAltered_.GetType().GetField(variableOrMethodName_) != null) //"if the object that's being changed has a field with the name of the field being changed"
         {
-            EquateOtherComponentVariable(objectBeingAltered_, objectBeingTakenFrom_, variableOrMethodName_, parameters_);
+            SetComponentVariable(componentBeingAltered_, variableOrMethodName_, parameters_);
         }
-        
+        else if (componentBeingTakenFrom_.GetType().GetField(parameters_) != null) //"if the object that's being taken from has a field with the name of the parameter being set"
+        {
+            EquateOtherComponentVariable(componentBeingAltered_, componentBeingTakenFrom_, variableOrMethodName_, parameters_);
+        }
     }    
 
     public void InvokeComponentMethod(object objectBeingAltered_, string methodName_, string parameters_)
@@ -84,8 +103,5 @@ public class GenericInvoker
         }                            
 
         infoOfFieldBeingSet.SetValue(objectBeingAltered_, infoOfFieldBeingTakenFrom?.GetValue(objectBeingTakenFrom_));    
-    }
-
-
-     
+    }     
 }

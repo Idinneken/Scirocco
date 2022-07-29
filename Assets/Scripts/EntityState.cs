@@ -4,15 +4,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class EntityState : SerializedMonoBehaviour
-{    
-    //features to add potentially: JSON deserialisation, defaulting to default variable value.    
-
+public class EntityState : SerializedMonoBehaviour //features to add potentially: JSON deserialisation;  
+{        
     public string stateType, initialStateName, currentStateName, previousStateName;    
     public Dictionary<string, State> states = new();
-    internal State currentState = new(), previousState;
-    GenericInvoker invoker = new();
-    // private bool initialStateApplied = false;
+    internal State currentState, previousState;
+    Invoker invoker = new();    
     
     void Start()
     {                                    
@@ -25,8 +22,7 @@ public class EntityState : SerializedMonoBehaviour
             print("initialStateName: '" + initialStateName + "' not found");
         }        
     }
-    
-    #region Adding/Removing/Applying/Toggling states
+        
     public void AddState(string stateName_, State state_)
     {
         if (!states.ContainsKey(stateName_))
@@ -45,27 +41,20 @@ public class EntityState : SerializedMonoBehaviour
 
     public void SetState(string stateName_)
     {
-        if(currentState != states[stateName_])
-        {
-            const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);                
-
-            if (previousState != null)
+        if(states[stateName_] != currentState) //If the incoming state isn't the current one
+        {                       
+            if (previousState != null) //If there has been a state before
             {
-                previousState = currentState;
-                previousStateName = currentStateName;                                
-                // if (previousState.outgoingDescriptions?.values != null)                
-                // {                    
-                //     IterateData(previousStateName, previousState.outgoingDescriptions, bindingFlags);
-                // }                
-            }                                                                  
+                previousState = currentState; 
+                invoker.ApplyComponentDescriptions(previousState.outgoingDescriptions, null, gameObject);
+            }             
                             
-            currentState = states[stateName_];
-            currentStateName = stateName_;
-
-            // if(currentState.ingoingDescriptions?.values != null)
-            // {                
-            //     IterateData(currentStateName, currentState.ingoingDescriptions, bindingFlags);              
-            // }            
+            currentState = states[stateName_];                        
+            if (currentState != null)
+            {
+                invoker.ApplyComponentDescriptions(currentState.ingoingDescriptions, null, gameObject);
+            }
+            
             previousState ??= new State();        
         }
         else
@@ -79,14 +68,17 @@ public class EntityState : SerializedMonoBehaviour
         if (currentStateName != firstStateName_ && currentStateName != secondStateName_)
         {
             SetState(firstStateName_);
+            currentStateName = firstStateName_;
         }
         else if (currentStateName == firstStateName_)
         {
             SetState(secondStateName_);
+            currentStateName = secondStateName_;
         }
         else if (currentStateName == secondStateName_)
         {
             SetState(firstStateName_);
+            currentStateName = firstStateName_;
         }
         
     }
@@ -94,50 +86,6 @@ public class EntityState : SerializedMonoBehaviour
     public void ToggleState()
     {
         SetState(previousStateName);
-    }
-
-    #endregion
+    }    
     
-    #region Component Data Application  
-    public void IterateData(State state_, bool iterateThroughIngoingData_, BindingFlags bindingFlags_) 
-    {            
-        Dictionary<string, ComponentDescription> descriptions;
-
-        if (iterateThroughIngoingData_)
-        {
-            descriptions = state_.ingoingDescriptions;
-        }
-        else
-        {
-            descriptions = state_.outgoingDescriptions;
-        }
-
-        foreach (KeyValuePair<string, ComponentDescription> nameCompDescPair in descriptions)
-        {
-            Component component = GetComponent(nameCompDescPair.Key);
-            
-            if (component)
-            {
-                foreach (MemberDescription memberDesc in nameCompDescPair.Value.memberDescriptions) //foreach component in the current collection
-                {                    
-                    invoker.DetermineAndApplyAction(component, component, memberDesc.memberName, memberDesc.memberValue);
-                
-                    // foreach (KeyValuePair<string, string> action in compCollection_.values[componentType.Key].values)
-                    // {
-                    //     invoker.DetermineAndApplyAction(component, component, action.Key, action.Value);
-                    // }
-                }
-                // else
-                // {
-                //     print("'" + componentType.Key + "' not found on the state '" + stateName_ + "' on '" + gameObject.name + "' '" + stateType + "'");                    
-                // }            
-            }
-
-            
-        }
-
-        
-    }        
-    
-    #endregion
 }    

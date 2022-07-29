@@ -226,7 +226,64 @@ MonoBehaviour:
       Entry: 7
       Data: 2|State, Assembly-CSharp
     - Name: ingoingDescriptions
-      Entry: 6
+      Entry: 7
+      Data: 3|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 4|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CharacterMovement
+    - Name: $v
+      Entry: 7
+      Data: 5|ComponentDescription, Assembly-CSharp
+    - Name: memberDescriptions
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: MemberDescription, Assembly-CSharp
+    - Name: memberName
+      Entry: 1
+      Data: currentHorizontalSpeed
+    - Name: memberValue
+      Entry: 1
+      Data: walkSpeed
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: outgoingDescriptions
       Entry: 6
@@ -245,9 +302,66 @@ MonoBehaviour:
       Data: running
     - Name: $v
       Entry: 7
-      Data: 3|State, Assembly-CSharp
+      Data: 7|State, Assembly-CSharp
     - Name: ingoingDescriptions
-      Entry: 6
+      Entry: 7
+      Data: 8|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 9|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CharacterMovement
+    - Name: $v
+      Entry: 7
+      Data: 10|ComponentDescription, Assembly-CSharp
+    - Name: memberDescriptions
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: MemberDescription, Assembly-CSharp
+    - Name: memberName
+      Entry: 1
+      Data: currentHorizontalSpeed
+    - Name: memberValue
+      Entry: 1
+      Data: runSpeed
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: outgoingDescriptions
       Entry: 6
@@ -266,33 +380,33 @@ MonoBehaviour:
       Data: crouching
     - Name: $v
       Entry: 7
-      Data: 4|State, Assembly-CSharp
+      Data: 12|State, Assembly-CSharp
     - Name: ingoingDescriptions
       Entry: 7
-      Data: 5|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
+      Data: 13|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 6|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+      Data: 14|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 
     - Name: $k
       Entry: 1
-      Data: Component1
+      Data: CharacterMovement
     - Name: $v
       Entry: 7
-      Data: 7|ComponentDescription, Assembly-CSharp
-    - Name: memberValuePairs
+      Data: 15|ComponentDescription, Assembly-CSharp
+    - Name: memberDescriptions
       Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
+      Data: 16|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -300,37 +414,23 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: MemberDescription, Assembly-CSharp
-    - Name: members
-      Entry: 7
-      Data: 9|System.Tuple`2[[System.String, mscorlib],[System.String, mscorlib]],
-        mscorlib
-    - Name: m_Item1
+    - Name: memberName
       Entry: 1
-      Data: Variable1
-    - Name: m_Item2
+      Data: currentHorizontalSpeed
+    - Name: memberValue
       Entry: 1
-      Data: Value1
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: crouchSpeed
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
       Data: MemberDescription, Assembly-CSharp
-    - Name: members
-      Entry: 7
-      Data: 10|System.Tuple`2[[System.String, mscorlib],[System.String, mscorlib]],
-        mscorlib
-    - Name: m_Item1
+    - Name: memberName
       Entry: 1
-      Data: Variable2
-    - Name: m_Item2
-      Entry: 1
-      Data: Value2
-    - Name: 
-      Entry: 8
+      Data: Crouch
+    - Name: memberValue
+      Entry: 6
       Data: 
     - Name: 
       Entry: 8
@@ -340,24 +440,6 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: Component2
-    - Name: $v
-      Entry: 7
-      Data: 11|ComponentDescription, Assembly-CSharp
-    - Name: memberValuePairs
-      Entry: 6
       Data: 
     - Name: 
       Entry: 8
@@ -373,14 +455,54 @@ MonoBehaviour:
       Data: 
     - Name: outgoingDescriptions
       Entry: 7
-      Data: 12|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
+      Data: 17|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 9
-      Data: 6
+      Data: 14
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: CharacterMovement
+    - Name: $v
+      Entry: 7
+      Data: 18|ComponentDescription, Assembly-CSharp
+    - Name: memberDescriptions
+      Entry: 7
+      Data: 19|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: MemberDescription, Assembly-CSharp
+    - Name: memberName
+      Entry: 1
+      Data: UnCrouch
+    - Name: memberValue
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -493,26 +615,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: data
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[ComponentDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|ComponentDescription, Assembly-CSharp
-    - Name: memberValuePairs
       Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
   collidableLayers:
   - serializedVersion: 2

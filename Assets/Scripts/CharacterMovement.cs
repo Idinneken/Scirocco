@@ -7,34 +7,18 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask groundMask;
 
     //Character specific
-    float currentHorizontalSpeed, verticalSpeed = 0f;    
-    public bool squatting;    
+    float currentHorizontalSpeed, verticalSpeed = 0f;        
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
     public float crouchingColliderHeight, crouchingCameraHeight;
     
-    internal float walkingColliderHeight, walkingCameraHeight;
+    internal float walkingColliderHeight, walkingCameraHeight;    
     
     //Global
     public float gravity = -10f;
 
     void Awake()
     {
-        // print("cameraLocalheight" + GetComponentInChildren<Camera>().transform.localPosition);
-        // print("cameraheight" + GetComponentInChildren<Camera>().transform.position);
         walkingCameraHeight = GetComponentInChildren<Camera>().transform.localPosition.y;
-    }
-
-    void Start()
-    {
-        // print(controller.height);
-        // walkingColliderHeight = controller.height;     
-        // print("controller height: " + controller.height);
-        // print("Collider height: " + walkingColliderHeight);
-        // print(walkingColliderHeight);
-
-        
-
-        // print(walkingCameraHeight);
     }
 
     void Update()
@@ -58,14 +42,16 @@ public class CharacterMovement : MonoBehaviour
                 movementState.ToggleBetweenStates("running", "walking");
             }
             
-            if (Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
+            
         }                        
                 
         Movement(x, z);
-        
+        Gravity();
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Jump();
+        }        
     }    
 
     private void Crouch()
@@ -83,22 +69,32 @@ public class CharacterMovement : MonoBehaviour
     }    
 
     private void Jump()
-    {        
-        verticalSpeed = 0f;
-        verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                                        
+    {                
+        if (controller.isGrounded)
+        {
+            verticalSpeed = 0f;
+            verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                         
+        }
+    }
+
+    private void Gravity()
+    {
+        if (controller.isGrounded && verticalSpeed <= 0)
+        {
+            verticalSpeed = 0;
+        }
+        else if (!controller.isGrounded)
+        {
+            verticalSpeed += gravity * Time.deltaTime;
+        }        
     }
 
     private void Movement(float x_, float z_)
-    {
-        verticalSpeed += gravity * Time.deltaTime; //Gravity? Who gives a crap about gravity?
+    {                 
+        Vector3 WASDAmount = transform.forward * z_ + transform.right * x_; //L+R + F+B        
+        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed                
 
-        Vector3 strafeAmount = transform.right * x_; //Left + Right
-        Vector3 forwardAmount = transform.forward * z_; //Forward + Back
-        Vector3 WASDAmount = forwardAmount + strafeAmount; //L+R + F+B        
-        Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed
-
-        Vector3 movement = /*AdjustVelocityToSlope(*/new(WASDMovement.x, verticalSpeed * Time.deltaTime, WASDMovement.z)/*)*/;
-        controller.Move(movement);
+        controller.Move(new(WASDMovement.x, 0f, WASDMovement.z));
     }
 
     private Vector3 AdjustVelocityToSlope(Vector3 velocity_)
