@@ -6,14 +6,12 @@ public class CharacterMovement : MonoBehaviour
     public EntityState movementState;
     public LayerMask groundMask;
 
-    //Character specific
     float currentHorizontalSpeed, verticalSpeed = 0f;        
     public float walkSpeed, runSpeed, crouchSpeed, slideSpeed, jumpHeight;
     public float crouchingColliderHeight, crouchingCameraHeight;
     
     internal float walkingColliderHeight, walkingCameraHeight;    
     
-    //Global
     public float gravity = -10f;
 
     void Awake()
@@ -23,12 +21,8 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        #region GATHERING FREE INPUTS
-
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");        
-
-        #endregion        
 
         if (controller.isGrounded)
         {            
@@ -40,10 +34,8 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 movementState.ToggleBetweenStates("running", "walking");
-            }
-            
-            
-        }                        
+            }                        
+        }
                 
         Movement(x, z);
         Gravity();
@@ -71,22 +63,20 @@ public class CharacterMovement : MonoBehaviour
     private void Jump()
     {                
         if (controller.isGrounded)
-        {
-            verticalSpeed = 0f;
+        {            
             verticalSpeed = Mathf.Sqrt(jumpHeight * -2f * gravity);                         
         }
     }
 
     private void Gravity()
     {
-        if (controller.isGrounded && verticalSpeed <= 0)
-        {
+        verticalSpeed += gravity * Time.deltaTime;                
+        controller.Move(new Vector3(0, verticalSpeed * Time.deltaTime, 0));
+        
+        if (controller.isGrounded)
+        {      
             verticalSpeed = 0;
         }
-        else if (!controller.isGrounded)
-        {
-            verticalSpeed += gravity * Time.deltaTime;
-        }        
     }
 
     private void Movement(float x_, float z_)
@@ -94,7 +84,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 WASDAmount = transform.forward * z_ + transform.right * x_; //L+R + F+B        
         Vector3 WASDMovement = currentHorizontalSpeed * Time.deltaTime * WASDAmount.normalized; //WASD Inputs * speed                
 
-        controller.Move(new(WASDMovement.x, 0f, WASDMovement.z));
+        controller.Move(AdjustVelocityToSlope(new(WASDMovement.x, 0f, WASDMovement.z)));
     }
 
     private Vector3 AdjustVelocityToSlope(Vector3 velocity_)

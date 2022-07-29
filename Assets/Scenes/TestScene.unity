@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45119733, g: 0.50094044, b: 0.57372886, a: 1}
+  m_IndirectSpecularColor: {r: 0.45119762, g: 0.50094056, b: 0.57372904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -801,21 +801,6 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"states.{\"crouching\"}.ingoingComponentCollection.values.{\"CharacterMovement\"}","value":{"$id":0,"$type":"ActionCollection,
-        Assembly-CSharp","values":{"$id":1,"$type":"System.Collections.Generic.Dictionary`2[[System.String,
-        mscorlib],[System.String, mscorlib]], mscorlib","comparer":{"$id":2,"$type":"System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib"},"$rlength":2,"$rcontent":[{"$k":"currentHorizontalSpeed","$v":"crouchSpeed"},{"$k":"Crouch","$v":null}]}}'
-      objectReference: {fileID: 0}
-    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 522794632265265790, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: m_Name
       value: 'Player '
@@ -864,6 +849,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3384938665092702938, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3384938665092702938, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
 --- !u!1 &1742878585

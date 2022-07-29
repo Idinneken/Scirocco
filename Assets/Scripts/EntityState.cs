@@ -1,8 +1,5 @@
-using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
 
 public class EntityState : SerializedMonoBehaviour //features to add potentially: JSON deserialisation;  
 {        
@@ -51,7 +48,7 @@ public class EntityState : SerializedMonoBehaviour //features to add potentially
                             
             currentState = states[stateName_];                        
             if (currentState != null)
-            {
+            {                
                 invoker.ApplyComponentDescriptions(currentState.ingoingDescriptions, null, gameObject);
             }
             
@@ -61,7 +58,7 @@ public class EntityState : SerializedMonoBehaviour //features to add potentially
         {
             print("it's already that state");
         }
-    }
+    }    
 
     public void ToggleBetweenStates(string firstStateName_, string secondStateName_)
     {

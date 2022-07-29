@@ -1,10 +1,10 @@
-namespace System
-{    
-    using System.Reflection;    
+using System.Reflection;    
 
+namespace System
+{        
     public static class SystemExtensions
     {
-        public static bool HasMethod_<T>(this T thingToCheck, string methodName, BindingFlags bindingFlags)
+        public static bool HasMethod_<T>(this T thingToCheck, string methodName, BindingFlags bindingFlags) where T : Type
         {
             try
             {
@@ -34,3 +34,5 @@ namespace System
         } 
     }
 }
+
+

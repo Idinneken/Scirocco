@@ -18,5 +18,5 @@ public class ComponentDescription{
 }
 
 public struct MemberDescription{    
-    public string memberName, memberValue;        
+    public string memberName, memberValue, sourcedFromObject, sourcedFromComponent;        
 }

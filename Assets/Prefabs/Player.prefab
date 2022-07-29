@@ -75,7 +75,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  squatting: 0
   walkSpeed: 6
   runSpeed: 12
   crouchSpeed: 3
@@ -83,7 +82,7 @@ MonoBehaviour:
   jumpHeight: 2
   crouchingColliderHeight: 1
   crouchingCameraHeight: 1
-  gravity: -10
+  gravity: -20
 --- !u!114 &8730355085803973918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,333 +193,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 0101060000007300740061007400650073002f000000000165000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b00530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000000000001010800000063006f006d00700061007200650072002f010000000159000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00470065006e00650072006900630045007100750061006c0069007400790043006f006d0070006100720065007200600031005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d005d002c0020006d00730063006f0072006c00690062000100000005060300000000000000042e27010200000024006b000107000000770061006c006b0069006e006700010102000000240076002f020000000116000000530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070000200000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e0073002f030000000174000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b0043006f006d0070006f006e0065006e0074004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000300000001010800000063006f006d007000610072006500720030010000000400000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e007400010102000000240076002f04000000012500000043006f006d0070006f006e0065006e0074004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d00430053006800610072007000050000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e0073002f050000000151000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e004c00690073007400600031005b005b004d0065006d006200650072004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c006900620006000000060100000000000000042f0600000001220000004d0065006d006200650072004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d0043005300680061007200700027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c00750065000109000000770061006c006b00530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507052d01140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e0073000505042e27010200000024006b000107000000720075006e006e0069006e0067000101020000002400760030020000000700000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000000800000001010800000063006f006d007000610072006500720030010000000900000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e0074000101020000002400760030040000000a0000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000000b00000006010000000000000004300600000027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c00750065000108000000720075006e00530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507052d01140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e0073000505042e27010200000024006b000109000000630072006f0075006300680069006e0067000101020000002400760030020000000c00000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000000d00000001010800000063006f006d007000610072006500720030010000000e00000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e0074000101020000002400760030040000000f0000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000001000000006020000000000000004300600000027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c0075006500010b000000630072006f00750063006800530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e0074000504300600000027010a0000006d0065006d006200650072004e0061006d0065000106000000430072006f007500630068002d010b0000006d0065006d00620065007200560061006c00750065002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507050101140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000001100000009010800000063006f006d00700061007200650072000e000000060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e007400010102000000240076003004000000120000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000001300000006010000000000000004300600000027010a0000006d0065006d006200650072004e0061006d006500010800000055006e00430072006f007500630068002d010b0000006d0065006d00620065007200560061006c00750065002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e0074000507050505070505050705
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: states
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[State,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: walking
-    - Name: $v
-      Entry: 7
-      Data: 2|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 3|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 4|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 5|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: walkSpeed
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: running
-    - Name: $v
-      Entry: 7
-      Data: 7|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 8|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 9|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 10|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: runSpeed
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: crouching
-    - Name: $v
-      Entry: 7
-      Data: 12|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 13|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 14|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 15|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: crouchSpeed
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: Crouch
-    - Name: memberValue
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 7
-      Data: 17|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 14
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 18|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: UnCrouch
-    - Name: memberValue
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   stateType: Movement
   initialStateName: walking
   currentStateName: 
@@ -606,17 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 2d01040000006400610074006100
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: data
-      Entry: 6
-      Data: 
+    SerializationNodes: []
   collidableLayers:
   - serializedVersion: 2
     m_Bits: 64

@@ -29,7 +29,7 @@ public class Invoker
     }    
     
     public void DetermineAndApplyAction(Component componentBeingAltered_, Component componentBeingTakenFrom_, string variableOrMethodName_, string parameters_)
-    {               
+    {                 
         if (componentBeingAltered_.GetType().HasMethod_(variableOrMethodName_, bindingFlags)) //"if the object that's being changed has a method called *whatever*"        
         {
             InvokeComponentMethod(componentBeingAltered_, variableOrMethodName_, parameters_);     
