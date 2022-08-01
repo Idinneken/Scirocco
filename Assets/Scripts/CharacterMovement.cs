@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
 
     void Awake()
     {
+        walkingColliderHeight = controller.height;
         walkingCameraHeight = GetComponentInChildren<Camera>().transform.localPosition.y;
     }
 
@@ -24,12 +25,14 @@ public class CharacterMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");        
 
-        if (controller.isGrounded)
-        {            
-            if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
             {
                 movementState.ToggleBetweenStates("crouching", "walking");
             }
+
+        if (controller.isGrounded)
+        {            
+            
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
@@ -48,16 +51,21 @@ public class CharacterMovement : MonoBehaviour
 
     private void Crouch()
     {
-        Camera camera = GetComponentInChildren<Camera>();
-        Vector3 cameraPosition = camera.transform.localPosition;      
-        camera.transform.localPosition = new Vector3(cameraPosition.x, crouchingCameraHeight, cameraPosition.z);
+        // Camera camera = GetComponentInChildren<Camera>();
+        // Vector3 cameraPosition = camera.transform.localPosition;      
+        // camera.transform.localPosition = new Vector3(cameraPosition.x, crouchingCameraHeight, cameraPosition.z);
+        controller.height = crouchingColliderHeight;
+        controller.center = new Vector3(controller.center.x, 0.5f, controller.center.z);
+
     }    
 
     private void UnCrouch()
     {
-        Camera camera = GetComponentInChildren<Camera>();
-        Vector3 cameraPosition = camera.transform.localPosition;      
-        camera.transform.localPosition = new Vector3(cameraPosition.x, walkingCameraHeight, cameraPosition.z);
+        // Camera camera = GetComponentInChildren<Camera>();
+        // Vector3 cameraPosition = camera.transform.localPosition;      
+        // camera.transform.localPosition = new Vector3(cameraPosition.x, walkingCameraHeight, cameraPosition.z);
+        controller.height = walkingColliderHeight;        
+        controller.center = new Vector3(controller.center.x, 1f, controller.center.z);
     }    
 
     private void Jump()
