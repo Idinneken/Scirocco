@@ -3,59 +3,95 @@ using UnityEngine;
 
 public class GeoCheck : MonoBehaviour
 {
-    public LayerMask layerMask;
-    public bool inRangeOfLedge = false;
-    public Transform rayStartTransform;    
-    public CharacterController controller;
+    public LayerMask layerMask;    
+    public CharacterController controller;    
+    public float maxHeightFromPlayer, minHeightFromPlayer, maxBreadthFromPlayer;
+    
+    internal bool inRangeOfLedge = false;
 
-    private Vector3 rayStartPosition;
-    private Vector3 ledgePoint;    
+    private Vector3 rayStartPosition;    
+    private Vector3 highestValidRayEndPosition, lowestValidRayEndPosition;
+    private Vector3 closestPoint;    
+    
+
     private float ledgePointRayLength;
-    private bool ledgePointIsValid;    
+    private bool ledgePointIsValid;
 
     void Update()
     {
-        rayStartPosition = rayStartTransform.position;
-
-        if (inRangeOfLedge && Input.GetKeyDown(KeyCode.G) && ledgePointIsValid)
-        {      
-            controller.ChangePos_(ledgePoint);            
-        }
-
-        if(inRangeOfLedge && ledgePointIsValid)
-        {
-            Debug.DrawLine(rayStartPosition, ledgePoint, Color.red, Time.deltaTime);
-        }        
+        rayStartPosition = transform.position;
     }
-
-    void OnTriggerStay(Collider other)
+    
+    void OnTriggerStay(Collider geoCollider)
     {
-        if (other.gameObject.IsOnLayer_(layerMask))
+        if (geoCollider.gameObject.IsOnLayer_(layerMask))
         {
-            ledgePoint = other.ClosestPoint(rayStartPosition);
-            inRangeOfLedge = true;   
-        }
+            closestPoint = geoCollider.ClosestPoint(rayStartPosition);
+            Vector3 angleRayStartPoint = new Vector3(transform.position.x, closestPoint.y, transform.position.z);            
+            
+            Ray angleRay = new Ray(angleRayStartPoint, transform.forward);
+            RaycastHit angleRayhit = new();
+            geoCollider.Raycast(angleRay, out angleRayhit, Mathf.Infinity);
+            Vector3 angleRayEndPoint = angleRayhit.point;
 
-        RaycastHit hit = new();
-        Physics.Linecast(rayStartPosition, ledgePoint, out hit);
+            // float angleBetween = Vector3.SignedAngle(angleRayStartPoint, angleRayEndPoint, closestPoint);
+            float angleBetween = Vector3.Angle(closestPoint.normalized, angleRayEndPoint.normalized);
 
-        if (hit.normal.y > 0.5f){
-            ledgePointIsValid = true;
-        }
-        else{
-            ledgePointIsValid = false;
-        }
+            print(angleBetween);
 
-        // print(hit.normal);
 
-    }
+            Debug.DrawLine(angleRayStartPoint, closestPoint, Color.blue, Time.deltaTime);
+            Debug.DrawLine(angleRayStartPoint, angleRayEndPoint, Color.red, Time.deltaTime);
+            
 
-    void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.IsOnLayer_(layerMask))
-        {
-            inRangeOfLedge = false;    
+               
         }
     }
+    
+    
+    
+    #region 
+
+    // void Update()
+    // {
+    //     rayStartPosition = rayStartTransform.position;
+
+    //     if (inRangeOfLedge && Input.GetKey(KeyCode.G) && ledgePointIsValid)
+    //     {
+    //         controller.ChangePos_(ledgePoint);
+    //     }
+
+    //     if (inRangeOfLedge && ledgePointIsValid)
+    //     {
+    //         Debug.DrawLine(rayStartPosition, ledgePoint, Color.red, Time.deltaTime);
+    //     }
+    // }
+
+    // void OnTriggerStay(Collider other)
+    // {
+    //     if (other.gameObject.IsOnLayer_(layerMask))
+    //     {
+    //         ledgePoint = other.ClosestPoint(rayStartPosition);
+    //         inRangeOfLedge = true;
+    //     }
+
+    //     RaycastHit hit = new();
+
+    //     Physics.Linecast(rayStartPosition, ledgePoint, out hit);
+
+    //     // print(transform.position.Absolute_());
+
+    //     Vector3 rayDiff = (rayStartPosition - ledgePoint).Absolute_();
+
+    //     print(rayDiff);
+    //     // print(Vector3.Distance(rayStartPosition, ledgePoint) < maxRayDistance);
+
+
+
+    //     // print(hit.normal);
+
+    // }
+
+    #endregion
 
 }
