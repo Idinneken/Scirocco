@@ -38,21 +38,9 @@ namespace Extensions
 
     public static class UnityEngineExtensions
     {
-        public static bool IsOnLayer_(this GameObject gameObject_, LayerMask layer_)
+        public static bool IsOnLayer_(this GameObject gameObject_, LayerMask layer_) 
         {
             if ((layer_.value & (1 << gameObject_.layer)) > 0)
-            {        
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static bool IsNotOnLayer_(this GameObject gameObject_, LayerMask layer_)
-        {
-            if ((~layer_.value & (1 << gameObject_.layer)) > 0)
             {        
                 return true;
             }
@@ -73,6 +61,12 @@ namespace Extensions
         {
             return new Vector3(Mathf.Abs(vector_.x), Mathf.Abs(vector_.y), Mathf.Abs(vector_.z) );
         }
+
+        public static float AngleBetweenPoints_(this Vector3 vertexPoint, Vector3 point1, Vector3 point2)
+        {
+            return Vector3.Angle(point1 - vertexPoint, point2 - vertexPoint);
+        }
+
 
     }
 }

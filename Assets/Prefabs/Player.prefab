@@ -36,7 +36,8 @@ Transform:
   m_Children:
   - {fileID: 8730355085261574190}
   - {fileID: 8730355084031063662}
-  - {fileID: 3270318610181000547}
+  - {fileID: 8319436706040659471}
+  - {fileID: 1601266267609206234}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,363 +194,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
+    SerializedFormat: 0
+    SerializedBytes: 0101060000007300740061007400650073002f000000000165000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b00530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000000000001010800000063006f006d00700061007200650072002f010000000159000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00470065006e00650072006900630045007100750061006c0069007400790043006f006d0070006100720065007200600031005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d005d002c0020006d00730063006f0072006c00690062000100000005060300000000000000042e27010200000024006b000107000000770061006c006b0069006e006700010102000000240076002f020000000116000000530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070000200000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e0073002f030000000174000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b0043006f006d0070006f006e0065006e0074004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000300000001010800000063006f006d007000610072006500720030010000000400000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e007400010102000000240076002f04000000012500000043006f006d0070006f006e0065006e0074004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d00430053006800610072007000050000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e0073002f050000000151000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e004c00690073007400600031005b005b004d0065006d006200650072004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c006900620006000000060100000000000000042f0600000001220000004d0065006d006200650072004400650073006300720069007000740069006f006e002c00200041007300730065006d0062006c0079002d0043005300680061007200700027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c00750065000109000000770061006c006b00530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507052d01140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e0073000505042e27010200000024006b000107000000720075006e006e0069006e0067000101020000002400760030020000000700000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000000800000001010800000063006f006d007000610072006500720030010000000900000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e0074000101020000002400760030040000000a0000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000000b00000006010000000000000004300600000027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c00750065000108000000720075006e00530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507052d01140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e0073000505042e27010200000024006b000109000000630072006f0075006300680069006e0067000101020000002400760030020000000c00000001011300000069006e0067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000000d00000001010800000063006f006d007000610072006500720030010000000e00000005060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e0074000101020000002400760030040000000f0000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000001000000006020000000000000004300600000027010a0000006d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010b0000006d0065006d00620065007200560061006c0075006500010b000000630072006f00750063006800530070006500650064002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e0074000504300600000027010a0000006d0065006d006200650072004e0061006d0065000106000000430072006f007500630068002d010b0000006d0065006d00620065007200560061006c00750065002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e007400050705050507050101140000006f007500740067006f0069006e0067004400650073006300720069007000740069006f006e00730030030000001100000009010800000063006f006d00700061007200650072000e000000060100000000000000042e27010200000024006b0001110000004300680061007200610063007400650072004d006f00760065006d0065006e007400010102000000240076003004000000120000000101120000006d0065006d006200650072004400650073006300720069007000740069006f006e00730030050000001300000006010000000000000004300600000027010a0000006d0065006d006200650072004e0061006d006500010800000055006e00430072006f007500630068002d010b0000006d0065006d00620065007200560061006c00750065002d011100000073006f0075007200630065006400460072006f006d004f0062006a006500630074002d011400000073006f0075007200630065006400460072006f006d0043006f006d0070006f006e0065006e0074000507050505070505050705
     ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: states
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[State,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: walking
-    - Name: $v
-      Entry: 7
-      Data: 2|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 3|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 4|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 5|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: walkSpeed
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: running
-    - Name: $v
-      Entry: 7
-      Data: 7|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 8|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 9|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 10|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: runSpeed
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: crouching
-    - Name: $v
-      Entry: 7
-      Data: 12|State, Assembly-CSharp
-    - Name: ingoingDescriptions
-      Entry: 7
-      Data: 13|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 14|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-        mscorlib]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 15|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 16|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: currentHorizontalSpeed
-    - Name: memberValue
-      Entry: 1
-      Data: crouchSpeed
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: Crouch
-    - Name: memberValue
-      Entry: 6
-      Data: 
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: outgoingDescriptions
-      Entry: 7
-      Data: 17|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[ComponentDescription,
-        Assembly-CSharp]], mscorlib
-    - Name: comparer
-      Entry: 9
-      Data: 14
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: CharacterMovement
-    - Name: $v
-      Entry: 7
-      Data: 18|ComponentDescription, Assembly-CSharp
-    - Name: memberDescriptions
-      Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[MemberDescription, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: MemberDescription, Assembly-CSharp
-    - Name: memberName
-      Entry: 1
-      Data: UnCrouch
-    - Name: memberValue
-      Entry: 6
-      Data: 
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   stateType: Movement
   initialStateName: walking
   currentStateName: 
@@ -566,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e2eb8b7df32704a8104513a20f1894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8131054325437792677
+--- !u!1 &4441240546914155710
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,62 +226,94 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3270318610181000547}
-  - component: {fileID: 4385200501975216136}
-  - component: {fileID: 4916908526146584191}
-  - component: {fileID: 1359094846337962630}
-  - component: {fileID: 4133029129382434663}
+  - component: {fileID: 8319436706040659471}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: RayTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3270318610181000547
+--- !u!4 &8319436706040659471
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131054325437792677}
+  m_GameObject: {fileID: 4441240546914155710}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 2.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1600487137859129885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4385200501975216136
+--- !u!1 &6812764853380439640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601266267609206234}
+  - component: {fileID: 4597885102319669916}
+  - component: {fileID: 3893255248734647792}
+  - component: {fileID: 189228905747915078}
+  - component: {fileID: 931091213002630472}
+  - component: {fileID: 512491385563638749}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601266267609206234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812764853380439640}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 3, y: 1.2, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1600487137859129885}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4597885102319669916
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131054325437792677}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!136 &4916908526146584191
-CapsuleCollider:
+  m_GameObject: {fileID: 6812764853380439640}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &3893255248734647792
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131054325437792677}
+  m_GameObject: {fileID: 6812764853380439640}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1359094846337962630
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &189228905747915078
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131054325437792677}
+  m_GameObject: {fileID: 6812764853380439640}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -639,26 +323,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4133029129382434663
+--- !u!114 &931091213002630472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8131054325437792677}
-  m_Enabled: 1
+  m_GameObject: {fileID: 6812764853380439640}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332ff3d54b9a5344687f0845e2772b17, type: 3}
+  m_Script: {fileID: 11500000, guid: 8626875ff447639428ce1a38851368b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionCheckDistance: 100
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  controller: {fileID: 8730355085803973912}
-  rayStartTransform: {fileID: 0}
-  maxHeightFromPlayer: 0
-  minHeightFromPlayer: 0
-  maxBreadthFromPlayer: 0
+  rigidBody: {fileID: 189228905747915078}
+--- !u!114 &512491385563638749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6812764853380439640}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ea4e7df1b32ea4a862fabaaad0fdcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyeSourceTransform: {fileID: 8319436706040659471}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8730355084031063657
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +367,7 @@ GameObject:
   - component: {fileID: 8730355084031063662}
   - component: {fileID: 8730355084031063660}
   - component: {fileID: 8730355084031063663}
+  - component: {fileID: 1685178033619081456}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -742,6 +440,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &1685178033619081456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730355084031063657}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8730355085261574187
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +467,7 @@ GameObject:
   - component: {fileID: 8730355085261574190}
   - component: {fileID: 8730355085261574185}
   - component: {fileID: 8730355085261574184}
+  - component: {fileID: 5809582575590849990}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -826,3 +541,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8730355085261574187}
   m_Enabled: 1
+--- !u!114 &5809582575590849990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730355085261574187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7ba5ba6b43a95a42acd58ba3a05b5ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64

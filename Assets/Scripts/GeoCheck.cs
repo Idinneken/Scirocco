@@ -5,47 +5,85 @@ public class GeoCheck : MonoBehaviour
 {
     public LayerMask layerMask;    
     public CharacterController controller;    
-    public float maxHeightFromPlayer, minHeightFromPlayer, maxBreadthFromPlayer;
-    
-    internal bool inRangeOfLedge = false;
+    public Transform rayTransform, playerViewTransform;    
 
-    private Vector3 rayStartPosition;    
-    private Vector3 highestValidRayEndPosition, lowestValidRayEndPosition;
-    private Vector3 closestPoint;    
+    private Vector3 rayStartPosition, forwardLineEndpoint, closestPoint, ledgePoint;    
+    private bool inRangeOfLedge, ledgePointIsValid, facingWall;
+    private RaycastHit forwardLineHit;  
+    private float angleAgainstWall;
     
-
-    private float ledgePointRayLength;
-    private bool ledgePointIsValid;
 
     void Update()
     {
-        rayStartPosition = transform.position;
+        rayStartPosition = transform.position;             
+
+        if (Input.GetKeyDown(KeyCode.K) && inRangeOfLedge /*&& ledgePointIsValid*/ && facingWall)
+        {
+            controller.ChangePos_(ledgePoint);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (Physics.Linecast(transform.position, (new Vector3(transform.forward.x, 0, transform.forward.z) * 100f) + rayStartPosition, out forwardLineHit, layerMask)) //if it hits
+        {
+            // print("line is hitting: " + forwardLineHit.collider.gameObject.ToString());
+            forwardLineEndpoint = forwardLineHit.point;
+        }
+        else
+        {
+            // print("line isn't hitting");
+            forwardLineEndpoint = (new Vector3(transform.forward.x, 0, transform.forward.z) * 100f) + rayStartPosition;
+        }
+
+        angleAgainstWall = Vector3.Angle(closestPoint - rayStartPosition, transform.forward);
+        
+        
+        // rayStartPosition.AngleBetweenPoints_(closestPoint, forwardLineEndpoint);
+
+        print(Mathf.Round(angleAgainstWall));
+
+
+        if (angleAgainstWall < 50)
+        {
+            facingWall = true;
+        }
+        else
+        {
+            facingWall = false;
+        }
+
+        Debug.DrawLine(rayStartPosition, closestPoint, Color.cyan, Time.fixedDeltaTime);                                        
+        Debug.DrawLine(rayStartPosition, forwardLineEndpoint, Color.red, Time.fixedDeltaTime);  
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        inRangeOfLedge = true;
     }
     
-    void OnTriggerStay(Collider geoCollider)
-    {
-        if (geoCollider.gameObject.IsOnLayer_(layerMask))
-        {
-            closestPoint = geoCollider.ClosestPoint(rayStartPosition);
-            Vector3 angleRayStartPoint = new Vector3(transform.position.x, closestPoint.y, transform.position.z);            
-            
-            Ray angleRay = new Ray(angleRayStartPoint, transform.forward);
-            RaycastHit angleRayhit = new();
-            geoCollider.Raycast(angleRay, out angleRayhit, Mathf.Infinity);
-            Vector3 angleRayEndPoint = angleRayhit.point;
+    void OnTriggerStay(Collider collider)
+    {        
+        if (collider.gameObject.IsOnLayer_(layerMask))
+        {                             
+            closestPoint = collider.ClosestPoint(rayStartPosition);         
+            // print(Mathf.Round(rayStartPosition.AngleBetweenPoints_(closestPoint, forwardLineEndpoint))); 
 
-            // float angleBetween = Vector3.SignedAngle(angleRayStartPoint, angleRayEndPoint, closestPoint);
-            float angleBetween = Vector3.Angle(closestPoint.normalized, angleRayEndPoint.normalized);
+            RaycastHit closestPointHit;
+            Physics.Linecast(rayStartPosition, closestPoint, out closestPointHit, layerMask, QueryTriggerInteraction.Ignore);
 
-            print(angleBetween);
+            // print(closestPointHit.collider?.gameObject.ToString() + closestPointHit.normal);
 
+            ledgePoint = closestPoint;
 
-            Debug.DrawLine(angleRayStartPoint, closestPoint, Color.blue, Time.deltaTime);
-            Debug.DrawLine(angleRayStartPoint, angleRayEndPoint, Color.red, Time.deltaTime);
-            
-
-               
+            // if (closestPointHit.normal.y >
         }
+
+    }
+
+    void OnTriggerExit(Collider collider)
+    {
+        inRangeOfLedge = false;
     }
     
     
