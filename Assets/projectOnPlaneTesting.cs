@@ -41,7 +41,9 @@ public class projectOnPlaneTesting : MonoBehaviour
             Vector3 projectOnEdge = Vector3.ProjectOnPlane(topHeightHit.point, topHeightHit.normal);
             Vector3 wallDirection = (topHeightHit.point - topHeightSourceTransform.position).normalized;            
             wallDirection = new Vector3(wallDirection.x, wallDirection.y - 0.1f, wallDirection.z);
+            
 
+            
             // RaycastHit 
             // Ray
 

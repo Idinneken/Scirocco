@@ -7,7 +7,7 @@ public class CollisionCheck : SerializedMonoBehaviour
 {
     public List<LayerMask> collidableLayers = new();        
     public string componentBeingAltered;                              
-    public Dictionary<string, ComponentDescription> data = new();            
+    // public Dictionary<string, ComponentDescription> data = new();            
     [Tooltip("Base available parameters for a collision: articulationBody, body, collider, contactCount, contacts, gameObject, impulse, relativeVelocity, rigidBody, transform")]        
 
     public bool invokeOnEnter = true, invokeOnExit = false;  

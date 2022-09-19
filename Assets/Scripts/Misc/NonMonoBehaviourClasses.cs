@@ -1,22 +1,38 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class NonMonoBehaviourClasses{}
 
 public class State{    
-    public Dictionary<string, ComponentDescription> ingoingDescriptions, outgoingDescriptions;             
-    void Awake(){
-        ingoingDescriptions = new(); outgoingDescriptions = new();
-    }    
-}
+    public string stateName;    
+    public List<Statement> statements;         
 
-public class ComponentDescription{    
-    public List<MemberDescription> memberDescriptions;
-    void Awake(){
-        memberDescriptions = new();
+    public State()
+    {
+        
+    }  
+
+    public void Awake()     
+    {
+
     }
 }
 
-public struct MemberDescription{    
-    public string memberName, memberValue, sourcedFromObject, sourcedFromComponent;        
+public class Statement{    
+    [Header("Data")]
+    public string targetComponent;    
+    public string targetMember;
+    [DisableIf("valueIsTransposed")] public string value;    
+    [EnableIf("valueIsTransposed")] public string sourcedValue;
+    [EnableIf("sourcedFromElsewhere")] public GameObject sourcedFromObject;
+    [EnableIf("sourcedFromElsewhere")] public bool sourcedFromComponent;  
+    // [Space(4)]
+
+    [Header("Conditions")]    
+    [ToggleLeft] public bool valueIsTransposed;
+    [ToggleLeft] public bool sourcedFromElsewhere;     
+
+          
 }

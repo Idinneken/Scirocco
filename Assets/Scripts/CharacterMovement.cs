@@ -25,20 +25,20 @@ public class CharacterMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");        
 
-        if (Input.GetKeyDown(KeyCode.C))
-            {
-                movementState.ToggleBetweenStates("crouching", "walking");
-            }
+        // if (Input.GetKeyDown(KeyCode.C))
+        //     {
+        //         movementState.ToggleBetweenStates("crouching", "walking");
+        //     }
 
-        if (controller.isGrounded)
-        {            
+        // if (controller.isGrounded)
+        // {            
             
 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                movementState.ToggleBetweenStates("running", "walking");
-            }                        
-        }
+        //     if (Input.GetKeyDown(KeyCode.LeftShift))
+        //     {
+        //         movementState.ToggleBetweenStates("running", "walking");
+        //     }                        
+        // }
                 
         Movement(x, z);
         Gravity();

@@ -9,25 +9,25 @@ public class Invoker
 {
     const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);    
 
-    public void ApplyComponentDescriptions(Dictionary<string, ComponentDescription> componentDescriptions_, Component componentBeingTakenFrom_, GameObject gameObjectBeingAltered_)
-    {
-        if (componentDescriptions_ != null || componentDescriptions_ != default(Dictionary<string, ComponentDescription>))
-            foreach(KeyValuePair<string, ComponentDescription> stringCompPair in componentDescriptions_)
-            {                                                    
-                Component component = gameObjectBeingAltered_.GetComponent(stringCompPair.Key);
-                ApplyComponentDescription(stringCompPair.Value, component, componentBeingTakenFrom_ ?? component);
-            }       
-        else        
-        return;        
-    }
+    // public void ApplyComponentDescriptions(Dictionary<string, ComponentDescription> componentDescriptions_, Component componentBeingTakenFrom_, GameObject gameObjectBeingAltered_)
+    // {
+    //     if (componentDescriptions_ != null || componentDescriptions_ != default(Dictionary<string, ComponentDescription>))
+    //         foreach(KeyValuePair<string, ComponentDescription> stringCompPair in componentDescriptions_)
+    //         {                                                    
+    //             Component component = gameObjectBeingAltered_.GetComponent(stringCompPair.Key);
+    //             ApplyComponentDescription(stringCompPair.Value, component, componentBeingTakenFrom_ ?? component);
+    //         }       
+    //     else        
+    //     return;        
+    // }
     
-    public void ApplyComponentDescription(ComponentDescription componentDescription_, Component componentBeingAltered_, Component componentBeingTakenFrom_)
-    {                        
-        foreach (MemberDescription memberDesc in componentDescription_.memberDescriptions) 
-        {                    
-            DetermineAndApplyAction(componentBeingAltered_, componentBeingTakenFrom_, memberDesc.memberName, memberDesc.memberValue);                
-        }                          
-    }    
+    // public void ApplyComponentDescription(ComponentDescription componentDescription_, Component componentBeingAltered_, Component componentBeingTakenFrom_)
+    // {                        
+    //     foreach (MemberDescription memberDesc in componentDescription_.memberDescriptions) 
+    //     {                    
+    //         DetermineAndApplyAction(componentBeingAltered_, componentBeingTakenFrom_, memberDesc.memberName, memberDesc.memberValue);                
+    //     }                          
+    // }    
     
     public void DetermineAndApplyAction(Component componentBeingAltered_, Component componentBeingTakenFrom_, string variableOrMethodName_, string parameters_)
     {                 
