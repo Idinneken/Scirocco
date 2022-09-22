@@ -7,32 +7,30 @@ public class NonMonoBehaviourClasses{}
 
 public class State{    
     public string stateName;    
-    public List<Statement> statements;         
-
-    public State()
-    {
-        
-    }  
-
-    public void Awake()     
-    {
-
-    }
+    public List<Statement> incomingStatements, outgoingStatements;         
 }
 
-public class Statement{    
-    [Header("Data")]
-    public string targetComponent;    
-    public string targetMember;
-    [DisableIf("valueIsTransposed")] public string value;    
-    [EnableIf("valueIsTransposed")] public string sourcedValue;
-    [EnableIf("sourcedFromElsewhere")] public GameObject sourcedFromObject;
-    [EnableIf("sourcedFromElsewhere")] public bool sourcedFromComponent;  
-    // [Space(4)]
+public class Statement{            
+    
+    [TitleGroup("Target", "What's being targeted?", TitleAlignments.Split)]
+    public Component targetComponent;    
+    public string targetMemberName;     
+    
+    [TitleGroup("Input", "What's being inputted to the target?", TitleAlignments.Split)]    
+    [DisableIf("inputValueIsSourcedFromComponentVariable")]public string inputValue;
+    [EnableIf("inputValueIsSourcedFromComponentVariable")]public Component componentName;  
+    [EnableIf("inputValueIsSourcedFromComponentVariable")]public string inputMemberName;  
 
-    [Header("Conditions")]    
-    [ToggleLeft] public bool valueIsTransposed;
-    [ToggleLeft] public bool sourcedFromElsewhere;     
+    // [EnableIf("@inputIsSourcedFromComponent && inputComponentIsKnownOf")]public Component inputComponent;
+    // [EnableIf("@inputIsSourcedFromComponent && !inputComponentIsKnownOf")]public string inputComponentName;
 
-          
+    [TitleGroup("Conditions", "What other conditions are there?", TitleAlignments.Split)]  
+    public bool inputValueIsSourcedFromComponentVariable;     
+    [MinValue(0)]public float delayAmount;          
+    // Maybe add support for "unknown" components. Components that aren't guaranteed to be there at runtime
+    // [EnableIf("inputIsSourcedFromComponent")]public bool inputComponentIsKnownOf = true;    
+    // public bool targetComponentIsKnownOf = true;     
+
+    [TitleGroup("Notes", "Notes for this statement", TitleAlignments.Split)]
+    [TextArea][HideLabel]public string statementNotes;
 }
