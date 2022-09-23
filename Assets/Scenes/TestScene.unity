@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45119733, g: 0.50094044, b: 0.57372886, a: 1}
+  m_IndirectSpecularColor: {r: 0.45119762, g: 0.50094056, b: 0.57372904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -524,6 +524,163 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &607479257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 522794632265265790, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+  m_PrefabInstance: {fileID: 1649362992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &607479258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607479257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5b98a92a381694baee793d8fd2f53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: states
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[State,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Xenophobia
+    - Name: $v
+      Entry: 7
+      Data: 2|State, Assembly-CSharp
+    - Name: ingoingStatements
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[Statement, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 4|Statement, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 6
+      Data: 
+    - Name: inputValue
+      Entry: 6
+      Data: 
+    - Name: inputComponent
+      Entry: 6
+      Data: 
+    - Name: inputMemberName
+      Entry: 6
+      Data: 
+    - Name: inputValueIsSourcedFromComponentField
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Statement, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 6
+      Data: 
+    - Name: inputValue
+      Entry: 6
+      Data: 
+    - Name: inputComponent
+      Entry: 6
+      Data: 
+    - Name: inputMemberName
+      Entry: 6
+      Data: 
+    - Name: inputValueIsSourcedFromComponentField
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: outgoingStatements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: currentState
+      Entry: 6
+      Data: 
+    - Name: previousState
+      Entry: 6
+      Data: 
+  stateType: Racism
+  initialStateName: 
+  currentStateName: 
+  previousStateName: 
+--- !u!114 &607479263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8730355085803973917, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+  m_PrefabInstance: {fileID: 1649362992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607479257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34200e82449f204b82e7c8b924d06ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &698305934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,12 +1639,42 @@ PrefabInstance:
       objectReference: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
-      value: 0
+      propertyPath: serializationData.PrefabModifications.Array.data[0]
+      value: '"path":"states.{\"running\"}.ingoingStatements.[0].inputValue","value":{"$id":0,"$type":"System.String,
+        mscorlib","30"}'
       objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"states.{\"running\"}.ingoingStatements.[0].targetComponent","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
+      value: '"path":"states.{\"running\"}.ingoingStatements.[0].targetMemberName","value":{"$id":0,"$type":"System.String,
+        mscorlib","currentHorizontalSpeed"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"states.{\"walking\"}.ingoingStatements.[0].inputComponent","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"states.{\"walking\"}.ingoingStatements.[0].targetComponent","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.ReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 607479263}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 607479263}
     - target: {fileID: 522794632265265790, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: m_Name
       value: 'Player '
@@ -1534,38 +1721,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1600487137859129885, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: invokeOnEnter
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: layerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: triggerLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: serializationData.PrefabModifications.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"invokeOnEnter","value":{"$id":0,"$type":"System.Boolean, mscorlib",true}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
