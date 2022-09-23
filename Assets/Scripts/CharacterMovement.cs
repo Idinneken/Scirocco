@@ -34,11 +34,11 @@ public class CharacterMovement : MonoBehaviour
         // {            
             
 
-        //     if (Input.GetKeyDown(KeyCode.LeftShift))
-        //     {
-        //         movementState.ToggleBetweenStates("running", "walking");
-        //     }                        
-        // }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            movementState.ToggleBetweenStates("running", "walking");
+        }                        
+        
                 
         Movement(x, z);
         Gravity();

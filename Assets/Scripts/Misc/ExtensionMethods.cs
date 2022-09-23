@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Extensions
@@ -34,6 +35,33 @@ namespace Extensions
                 return true;
             }
         } 
+
+        public static bool HasField_(this Type thingToCheck, string variableName, BindingFlags bindingFlags)
+        {
+            try
+            {                
+                return thingToCheck.GetField(variableName, bindingFlags) != null;
+            }
+            catch(AmbiguousMatchException)
+            {
+                // ambiguous means there is more than one result,
+                // which means: a method with that name does exist
+                return true;
+            }
+        } 
+
+        public static List<Type> GetTypes_(this List<object> objects_)
+        {
+            List<Type> types = new();
+            
+            foreach (object ob in objects_)
+            {
+                types.Add(ob.GetType());
+            }
+
+            return types;
+        }
+
     }
 
     public static class UnityEngineExtensions

@@ -196,7 +196,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 8730355085803973917}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -204,79 +205,60 @@ MonoBehaviour:
     SerializationNodes:
     - Name: states
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[State, Assembly-CSharp]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[State,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|State, Assembly-CSharp
-    - Name: stateName
+      Data: 
+    - Name: $k
       Entry: 1
       Data: walking
-    - Name: statements
+    - Name: $v
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[Statement, Assembly-CSharp]], mscorlib
+      Data: 2|State, Assembly-CSharp
+    - Name: ingoingStatements
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[Statement, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 3|Statement, Assembly-CSharp
-    - Name: targetComponent
-      Entry: 6
-      Data: 
-    - Name: targetMember
-      Entry: 6
-      Data: 
-    - Name: value
-      Entry: 6
-      Data: 
-    - Name: sourcedValue
-      Entry: 6
-      Data: 
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
-      Entry: 5
-      Data: false
-    - Name: valueIsTransposed
-      Entry: 5
-      Data: false
-    - Name: sourcedFromElsewhere
-      Entry: 5
-      Data: false
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 1
     - Name: 
       Entry: 7
       Data: 4|Statement, Assembly-CSharp
     - Name: targetComponent
+      Entry: 10
+      Data: 0
+    - Name: targetMemberName
+      Entry: 1
+      Data: walkSpeed
+    - Name: inputValue
+      Entry: 1
+      Data: 1000
+    - Name: inputComponent
       Entry: 6
       Data: 
-    - Name: targetMember
+    - Name: inputMemberName
       Entry: 6
       Data: 
-    - Name: value
-      Entry: 6
-      Data: 
-    - Name: sourcedValue
-      Entry: 6
-      Data: 
-    - Name: sourcedFromObject
-      Entry: 6
-      Data: 
-    - Name: sourcedFromComponent
+    - Name: inputValueIsSourcedFromComponentField
       Entry: 5
       Data: false
-    - Name: valueIsTransposed
-      Entry: 5
-      Data: false
-    - Name: sourcedFromElsewhere
-      Entry: 5
-      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -286,6 +268,12 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: outgoingStatements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -294,6 +282,12 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 8
+      Data: 
+    - Name: currentState
+      Entry: 6
+      Data: 
+    - Name: previousState
+      Entry: 6
       Data: 
   stateType: Movement
   initialStateName: walking
