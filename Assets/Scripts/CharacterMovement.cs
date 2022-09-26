@@ -14,6 +14,8 @@ public class CharacterMovement : MonoBehaviour
     
     public float gravity = -10f;
 
+    internal string test = "foo bar";
+
     void Awake()
     {
         walkingColliderHeight = controller.height;

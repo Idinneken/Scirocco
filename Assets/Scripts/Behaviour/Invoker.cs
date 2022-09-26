@@ -43,15 +43,13 @@ public class Invoker
             else //If the statement invokes a method
             {
                 if (!statement_.inputValueIsSourcedFromAnExistingComponentField) //If the input value is typed in via the inspector
-                {
-                    // Debug.Log("here 1");
+                {                    
                     InvokeComponentMethod(statement_.targetComponent, statement_.targetMemberName, statement_.inputValue);    
                     
                 }
                 else //If the input value is a field from another component
-                {
-                    // Debug.Log("here 2");
-                    // InvokeComponentMethod(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputValue);
+                {                    
+                    InvokeComponentMethod(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputMemberName);
                 }
             }
 
@@ -62,48 +60,41 @@ public class Invoker
         }        
     } 
 
-    // public void InvokeComponentMethod(Component componentBeingAltered_, Component componentBeingTakenFrom_, string methodName_, string parameters_)
-    // {
-    //     List<object> values = new();
-    //     List<string> parameters = JsonConvert.DeserializeObject<List<string>>(parameters_);
+    public void InvokeComponentMethod(Component componentBeingAltered_, Component componentBeingTakenFrom_, string invokedMethodName_, string fieldTakenFrom_)
+    {
+        List<object> values = new();                        
 
-    //     foreach(string str in parameters) 
-    //     {
-    //         values.Add(componentBeingAltered_.GetType().GetField(parameters_, bindingFlags).GetValue(componentBeingTakenFrom_));
-    //     }
+        foreach(string parameter in JsonConvert.DeserializeObject<List<string>>(fieldTakenFrom_)) 
+        {
+            values.Add(componentBeingTakenFrom_.GetType().GetField(parameter, bindingFlags).GetValue(componentBeingTakenFrom_));
+        }
 
-    //     componentBeingAltered_.GetType().GetMethod(methodName_, bindingFlags, null, values.GetTypes_().ToArray(), null)
-    //     .Invoke(componentBeingAltered_, bindingFlags, null, values.ToArray(), null);
-    // }
+        componentBeingAltered_.GetType().GetMethod(invokedMethodName_, bindingFlags, null, values.GetTypes_().ToArray(), null)
+        .Invoke(componentBeingAltered_, bindingFlags, null, values.ToArray(), null);
+    }
     
     public void InvokeComponentMethod(Component componentBeingAltered_, string methodName_, string parameter_)
     {                              
-        List<object> parameters = new();        
-        List<Type> parameterTypes = new();                
+        List<object> parameters = new();                          
 
         if (!string.IsNullOrWhiteSpace(parameter_))
         {
             parameters = JsonConvert.DeserializeObject<List<object>>(parameter_);     
 
-            foreach (object obj in parameters)
+            for (int i = 0; i < parameters.Count; i++)
             {
-                Debug.Log(obj.GetType());
-
-                if (obj.GetType() == typeof(System.Int64))
+                if (parameters[i].GetType() == typeof(System.Int64))
                 {                    
-                    Convert.ToInt32(obj);
-                    Debug.Log(obj.GetType());
+                    parameters[i] = Convert.ToInt32(parameters[i]);                                         
                 }
-            }                             
+            }                                  
         }
         else
         {
             parameters = null;                   
-        }     
+        }                      
         
-        parameterTypes = parameters.GetTypes_();        
-        
-        componentBeingAltered_.GetType().GetMethod(methodName_, bindingFlags, null, parameterTypes.ToArray(), null)
+        componentBeingAltered_.GetType().GetMethod(methodName_, bindingFlags, null, parameters.GetTypes_().ToArray(), null)
         .Invoke(componentBeingAltered_, bindingFlags, null, parameters.ToArray(), null);        
     }
 

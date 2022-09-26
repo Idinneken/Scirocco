@@ -1493,7 +1493,7 @@ PrefabInstance:
       objectReference: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
@@ -1505,15 +1505,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[2]
-      value: '"path":"states.{\"running\"}.ingoingStatements.[1].inputValue","value":{"$id":0,"$type":"System.String,
-        mscorlib","[\"hello\", 100]"}'
+      value: '"path":"states.{\"running\"}.ingoingStatements.[1].inputComponent","value":$eref:0'
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[3]
-      value: '"path":"states.{\"running\"}.ingoingStatements.[1].targetComponent","value":$eref:0'
+      value: '"path":"states.{\"running\"}.ingoingStatements.[1].inputMemberName","value":{"$id":0,"$type":"System.String,
+        mscorlib","[\"test\"]"}'
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"states.{\"running\"}.ingoingStatements.[1].inputValueIsSourcedFromAnExistingComponentField","value":{"$id":0,"$type":"System.Boolean,
+        mscorlib",true}'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[5]
+      value: '"path":"states.{\"running\"}.ingoingStatements.[1].targetComponent","value":$eref:0'
+      objectReference: {fileID: 0}
+    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[6]
       value: '"path":"states.{\"walking\"}.ingoingStatements.[0].targetComponent","value":$eref:0'
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
