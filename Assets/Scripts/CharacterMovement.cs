@@ -117,7 +117,7 @@ public class CharacterMovement : MonoBehaviour
         print(input_);
     }
 
-    public void StatementTest(string input_, System.Int64 number_)
+    public void StatementTest(string input_, int number_)
     {
         print(input_ + number_);
     }

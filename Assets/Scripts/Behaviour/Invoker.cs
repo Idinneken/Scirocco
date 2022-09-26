@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 
 public class Invoker
 {
-    const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);    
-    
+    const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);        
 
     public void ParseStatements(List<Statement> statements_)
     {
@@ -84,21 +83,25 @@ public class Invoker
 
         if (!string.IsNullOrWhiteSpace(parameter_))
         {
-            // parameters = JsonSerializer
+            parameters = JsonConvert.DeserializeObject<List<object>>(parameter_);     
 
-            parameters = JsonConvert.DeserializeObject<List<object>>(parameter_);   
-
-            foreach(object arg in parameters)
+            foreach (object obj in parameters)
             {
-                parameterTypes.Add(arg.GetType());
-                Debug.Log("object exists");
-                Debug.Log(arg.GetType());
-            }
+                Debug.Log(obj.GetType());
+
+                if (obj.GetType() == typeof(System.Int64))
+                {                    
+                    Convert.ToInt32(obj);
+                    Debug.Log(obj.GetType());
+                }
+            }                             
         }
         else
         {
             parameters = null;                   
-        }        
+        }     
+        
+        parameterTypes = parameters.GetTypes_();        
         
         componentBeingAltered_.GetType().GetMethod(methodName_, bindingFlags, null, parameterTypes.ToArray(), null)
         .Invoke(componentBeingAltered_, bindingFlags, null, parameters.ToArray(), null);        
