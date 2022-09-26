@@ -111,4 +111,14 @@ public class CharacterMovement : MonoBehaviour
         }
         return velocity_; //Otherwise, return the velocity already given
     }
+
+    public void StatementTest(string input_)
+    {
+        print(input_);
+    }
+
+    public void StatementTest(string input_, System.Int64 number_)
+    {
+        print(input_ + number_);
+    }
 }

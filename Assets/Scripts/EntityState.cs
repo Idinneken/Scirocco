@@ -8,13 +8,14 @@ public class EntityState : SerializedMonoBehaviour //features to add potentially
     public State currentState, previousState;
     private Invoker invoker = new();    
 
-    void Awake()
-    {
-        
-    }
     
     void Start()
-    {                                    
+    {                           
+        // foreach(KeyValuePair<string, State> pair in states)
+        // {
+        //     print(pair.Key);
+        // }
+
         if (states.ContainsKey(initialStateName))
         {          
             SetState(initialStateName);
