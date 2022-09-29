@@ -568,7 +568,7 @@
             <para>Use this to allow the user to choose from a set of predefined color options.</para>
             </summary>
             <remarks>
-            <para>See and edit the color palettes in Tools > Odin Inspector > Drawers > Color Palettes.</para>
+            <para>See and edit the color palettes in Tools > Odin > Inspector > Preferences > Drawers > Color Palettes.</para>
             <note type="note">The color property is not tied to the color palette, and can be edited. Therefore the color will also not update if the ColorPalette is edited.</note>
             </remarks>
             <example>
@@ -906,6 +906,11 @@
             <param name="condition">A resolved string that defines the condition to check the value of, such as a member name or an expression.</param>
             <param name="optionalValue">Value to check against.</param>
         </member>
+        <member name="T:Sirenix.OdinInspector.DisableInAttribute">
+            <summary>
+            Disables a member based on which type of a prefab and instance it is in. 
+            </summary>
+        </member>
         <member name="T:Sirenix.OdinInspector.DisableInEditorModeAttribute">
             <summary>
             <para>DisableInEditorMode is used on any property, and disables the property when not in play mode.</para>
@@ -971,39 +976,14 @@
             Disables a property if it is drawn from a prefab asset or a prefab instance.
             </summary>
         </member>
-        <member name="F:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.ErrorMessage">
+        <member name="T:Sirenix.OdinInspector.DisallowModificationsInAttribute">
             <summary>
-            The message of the info box.
+            DisallowModificationsIn disables / grays out members, preventing modifications from being made and enables validation,
+            providing error messages in case a modification was made prior to introducing the attribute.
             </summary>
-        </member>
-        <member name="F:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.MessageType">
-            <summary>
-            The type of the info box.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.#ctor">
-            <summary>
-            Adds an error box to the inspector, if the property is missing.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.#ctor(System.String,Sirenix.OdinInspector.InfoMessageType)">
-            <summary>
-            Adds an info box to the inspector, if the property is missing.
-            </summary>
-            <param name="errorMessage">The message to display in the error box.</param>
-            <param name="messageType">The type of info box to draw.</param>
-        </member>
-        <member name="M:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.#ctor(System.String)">
-            <summary>
-            Adds an error box to the inspector, if the property is missing.
-            </summary>
-            <param name="errorMessage">The message to display in the error box.</param>
-        </member>
-        <member name="M:Sirenix.OdinInspector.DisallowPrefabModificationsAttribute.#ctor(Sirenix.OdinInspector.InfoMessageType)">
-            <summary>
-            Adds an info box to the inspector, if the property is missing.
-            </summary>
-            <param name="messageType">The type of info box to draw.</param>
+            <seealso cref="T:Sirenix.OdinInspector.DisableInAttribute"/>
+            <seealso cref="T:Sirenix.OdinInspector.HideInAttribute"/>
+            <seealso cref="T:Sirenix.OdinInspector.RequiredAttribute"/>
         </member>
         <member name="T:Sirenix.OdinInspector.DisplayAsStringAttribute">
              <summary>
@@ -1175,6 +1155,11 @@
             </summary>
             <param name="condition">A resolved string that defines the condition to check the value of, such as a member name or an expression.</param>
             <param name="optionalValue">Value to check against.</param>
+        </member>
+        <member name="T:Sirenix.OdinInspector.EnableInAttribute">
+            <summary>
+            Enables a member based on which type of a prefab and instance it is. 
+            </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.EnumPagingAttribute">
             <summary>
@@ -1649,6 +1634,11 @@
             Combines HideIfGroup attributes.
             </summary>
             <param name="other">Another ShowIfGroup attribute.</param>
+        </member>
+        <member name="T:Sirenix.OdinInspector.HideInAttribute">
+            <summary>
+            Hides a member based on which type of a prefab and instance it is in. 
+            </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.HideInEditorModeAttribute">
             <summary>
@@ -3114,10 +3104,10 @@
         </member>
         <member name="T:Sirenix.OdinInspector.OptionalAttribute">
             <summary>
-            <para>
-                Overrides the Reference Required by Default rule to allow for null values.
-                Has no effect if the rule is disabled.
-            </para>
+            Overrides the 'Reference Required by Default' rule to allow for null values.
+            Has no effect if the rule is disabled.
+            
+            This attribute does not do anything unless you have Odin Validator and the 'Reference Required by Default' rule is enabled.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.PreviewFieldAttribute">
@@ -3862,6 +3852,11 @@
             </summary>
             <param name="messageType">The type of info box to draw.</param>
         </member>
+        <member name="T:Sirenix.OdinInspector.RequiredInAttribute">
+            <summary>
+            Makes a member required based on which type of a prefab and instance it is in. 
+            </summary>
+        </member>
         <member name="F:Sirenix.OdinInspector.RequiredInPrefabAssetsAttribute.ErrorMessage">
             <summary>
             The message of the info box.
@@ -4201,6 +4196,11 @@
             Combines ShowIfGroup attributes.
             </summary>
             <param name="other">Another ShowIfGroup attribute.</param>
+        </member>
+        <member name="T:Sirenix.OdinInspector.ShowInAttribute">
+            <summary>
+            Shows a member based on which type of a prefab and instance it is in. 
+            </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.ShowInInlineEditorsAttribute">
             <summary>
@@ -5587,7 +5587,7 @@
             <summary>
             Draws each dictionary item in a box with the key in the header and the value inside the box.
             Whether or not the box is expanded or collapsed by default, is determined by the
-            "Expand Foldout By Default" setting found in the preferences window "Tools > Odin Inspector > Preferences > Drawers > Settings".
+            "Expand Foldout By Default" setting found in the preferences window "Tools > Odin > Inspector > Preferences > Drawers > Settings".
             </summary>
         </member>
         <member name="F:Sirenix.OdinInspector.DictionaryDisplayOptions.CollapsedFoldout">
@@ -5760,6 +5760,61 @@
         <member name="F:Sirenix.OdinInspector.ObjectFieldAlignment.Right">
             <summary>
             Right aligned.
+            </summary>
+        </member>
+        <member name="T:Sirenix.OdinInspector.PrefabKind">
+            <summary>
+            The prefab kind returned by <see cref="!:Sirenix.OdinInspector.Editor.OdinPrefabUtility.GetPrefabKind"/> 
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.None">
+            <summary>
+            None. 
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.InstanceInScene">
+            <summary>
+            Instances of prefabs in scenes.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.InstanceInPrefab">
+            <summary>
+            Instances of prefabs nested inside other prefabs.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.Regular">
+            <summary>
+            Regular prefab assets.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.Variant">
+            <summary>
+            Prefab variant assets.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.NonPrefabInstance">
+            <summary>
+            Non-prefab component or gameobject instances in scenes.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.PrefabInstance">
+            <summary>
+            Instances of regular prefabs, and prefab variants in scenes or nested in other prefabs.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.PrefabAsset">
+            <summary>
+            Prefab assets and prefab variant assets.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.PrefabInstanceAndNonPrefabInstance">
+            <summary>
+            Prefab Instances, as well as non-prefab instances.
+            </summary>
+        </member>
+        <member name="F:Sirenix.OdinInspector.PrefabKind.All">
+            <summary>
+            All kinds
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.SearchFilterOptions">

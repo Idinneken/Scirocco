@@ -1,7 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
-public class EntityState : SerializedMonoBehaviour //features to add potentially: JSON deserialisation;  
+public class EntityState : SerializedMonoBehaviour 
 {        
     public string stateType, initialStateName, currentStateName, previousStateName;        
     public Dictionary<string, State> states;
@@ -10,12 +10,7 @@ public class EntityState : SerializedMonoBehaviour //features to add potentially
 
     
     void Start()
-    {                           
-        // foreach(KeyValuePair<string, State> pair in states)
-        // {
-        //     print(pair.Key);
-        // }
-
+    {                                   
         if (states.ContainsKey(initialStateName))
         {          
             SetState(initialStateName);

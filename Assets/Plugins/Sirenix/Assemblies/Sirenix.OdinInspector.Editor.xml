@@ -8325,6 +8325,11 @@
             Creates an editor window instance for the specified object, without opening the window.
             </summary>
         </member>
+        <member name="M:Sirenix.OdinInspector.Editor.OdinEditorWindow.CreateOdinEditorWindowInstanceForObject(System.Object,System.Boolean)">
+            <summary>
+            Creates an editor window instance for the specified object, without opening the window.
+            </summary>
+        </member>
         <member name="P:Sirenix.OdinInspector.Editor.OdinEditorWindow.PropertyTree">
             <summary>
             The Odin property tree drawn.
@@ -10715,31 +10720,9 @@
             Builds the selection tree.
             </summary>
         </member>
-        <member name="T:Sirenix.OdinInspector.Editor.OdinGettingStartedWindow">
+        <member name="P:Sirenix.OdinInspector.Editor.GettingStarted.GettingStartedWindow.OdinBg">
             <summary>
-            The Odin Getting Started Window
-            </summary>
-            <seealso cref="T:Sirenix.OdinInspector.Editor.OdinEditorWindow" />
-        </member>
-        <member name="M:Sirenix.OdinInspector.Editor.OdinGettingStartedWindow.ShowWindow">
-            <summary>
-            Shows the window.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.Editor.OdinGettingStartedWindow.Initialize">
-            <summary>
-            Initialize get called by OnEnable and by OnGUI after assembly reloads
-            which often happens when you recompile or enter and exit play mode.
-            </summary>
-        </member>
-        <member name="P:Sirenix.OdinInspector.Editor.OdinGettingStartedWindow.UseScrollView">
-            <summary>
-            Gets a value indicating whether the window should draw a scroll view.
-            </summary>
-        </member>
-        <member name="M:Sirenix.OdinInspector.Editor.OdinGettingStartedWindow.OnGUI">
-            <summary>
-            Draws the Odin Editor Window.
+            Gets a texture of an odin bg symbol.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.OdinInspectorAboutWindow">
@@ -10749,7 +10732,7 @@
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.StaticInspectorWindow">
             <summary>
-            Access the StaticInspectorWindow from Tools > Odin Inspector > Static Inspector.
+            Access the StaticInspectorWindow from Tools > Odin > Inspector > Static Inspector.
             </summary>
         </member>
         <member name="T:Sirenix.OdinInspector.Editor.StaticInspectorWindow.AccessModifierFlags">

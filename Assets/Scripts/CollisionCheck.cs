@@ -12,8 +12,7 @@ public class CollisionCheck : SerializedMonoBehaviour
 
     public bool invokeOnEnter = true, invokeOnExit = false;  
     private List<object> fieldValues = new();
-    private Invoker invoker = new();
-    private Sourcer sourcer;
+    private Invoker invoker = new();    
     private const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);
 
     // void OnTriggerEnter(Collider collider_)

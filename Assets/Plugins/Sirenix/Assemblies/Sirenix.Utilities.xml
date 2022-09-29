@@ -833,7 +833,7 @@
         <member name="T:Sirenix.Utilities.RectExtensions">
             <summary>
             Defines a collection of handy Rect transformation methods, that can chained together for complex behaviour.
-            Note that no method defined here changes the original Rect, but instead returns a new transformed Rect.
+            Note that only the TakeX method defined here actually change the original Rect; the rest instead return a new transformed Rect.
             </summary>
         </member>
         <member name="M:Sirenix.Utilities.RectExtensions.SetWidth(UnityEngine.Rect,System.Single)">
