@@ -608,7 +608,7 @@ MonoBehaviour:
       Data: 
     - Name: statementInvokesAMethod
       Entry: 5
-      Data: false
+      Data: true
     - Name: inputValueIsSourcedFromAnExistingComponentField
       Entry: 5
       Data: false
@@ -640,12 +640,12 @@ MonoBehaviour:
   collectBox: {fileID: 652380298}
   associatedComponents:
   - {fileID: 652380303}
-  activatesOnPickup: 1
+  activatesOnPickup: 0
   activatesOnSwitch: 0
-  activatesOnUse: 0
-  removedOnPickup: 1
-  removedOnSwitch: 0
-  removedOnUse: 0
+  activatesOnUse: 1
+  deletedOnPickup: 0
+  deletedOnSwitch: 0
+  deletedOnUse: 0
 --- !u!136 &652380298
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -731,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652380296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: 1.692, z: 0}
+  m_LocalPosition: {x: 4.75, y: 1.692, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -750,7 +750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7436d6bd69fd5da43b6f782da7ac8f8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
   isHealthPotion: 1
   isManaPotion: 0
   value: 20
