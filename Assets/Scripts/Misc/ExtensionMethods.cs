@@ -109,6 +109,31 @@ namespace Extensions
             return Vector3.Angle(point1 - vertexPoint, point2 - vertexPoint);
         }
 
+        public static void CopyPasteComponent_(this GameObject destination_, Component component_)
+        {
+            System.Type type = component_.GetType();
+            Component copy = destination_.AddComponent(type);
+            // Copied fields can be restricted with BindingFlags
+            System.Reflection.FieldInfo[] fields = type.GetFields(); 
+            foreach (System.Reflection.FieldInfo field in fields)
+            {
+                field.SetValue(copy, field.GetValue(component_));
+            }
+            // return copy;
+        }
+
+        // public static Component TransferComponent(this GameObject original_, Component destination)
+        // {
+        //     System.Type type = original.GetType();
+        //     Component copy = destination.AddComponent(type);
+        //     System.Reflection.FieldInfo[] fields = type.GetFields();
+        //     foreach (System.Reflection.FieldInfo field in fields)
+        //     {
+        //         field.SetValue(copy, field.GetValue(original));
+        //     }
+        //     return copy;
+        // }
+
 
     }
 }

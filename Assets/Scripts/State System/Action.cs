@@ -1,10 +1,11 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class Statement
-{
+public class Action
+{    
     [TitleGroup("Target", "What's being targeted?", TitleAlignments.Split)]
-    [LabelWidth(192)] public Component targetComponent;
+    [LabelWidth(192)][DisableIf("useTryGetComponent")] public Component targetComponent;
+    [LabelWidth(192)][EnableIf("useTryGetComponent")] public string targetComponentName;
     [LabelWidth(192)] public string targetMemberName;
 
     [TitleGroup("Input", "What's being inputted to the target?", TitleAlignments.Split)]
@@ -18,6 +19,8 @@ public class Statement
     [TitleGroup("Conditions", "What other conditions are there?", TitleAlignments.Split)]
     [LabelWidth(384)] public bool statementInvokesAMethod = false;
     [LabelWidth(384)] public bool inputValueIsSourcedFromAnExistingComponentField = false;
+    [LabelWidth(384)] public bool useTryGetComponent = false;
+
     [LabelWidth(192)][MinValue(0)] public float delayAmount;
     // Maybe add support for "unknown" components. Components that aren't guaranteed to be there at runtime
     // [EnableIf("inputIsSourcedFromComponent")]public bool inputComponentIsKnownOf = true;    

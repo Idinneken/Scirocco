@@ -44,13 +44,13 @@ public class EntityState : SerializedMonoBehaviour
             if (previousState != null) //If there has been a state before
             {
                 previousState = currentState; 
-                invoker.ParseStatements(previousState.outgoingStatements);
+                invoker.ParseActions(previousState.outgoingStatements);
             }             
                             
             currentState = states[stateName_];                        
             if (currentState != null)
             {                
-                invoker.ParseStatements(currentState.ingoingStatements);
+                invoker.ParseActions(currentState.ingoingStatements);
             }
             
             previousState ??= new State();        

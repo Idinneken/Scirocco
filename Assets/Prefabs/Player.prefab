@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8730355085803973912}
   - component: {fileID: 8730355085803973917}
   - component: {fileID: 8730355085803973918}
-  - component: {fileID: 8730355085803973919}
   - component: {fileID: -9143553965180812966}
   - component: {fileID: 4242870767599429340}
+  - component: {fileID: 6186233568464279357}
+  - component: {fileID: 4544985932071206111}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,88 +100,6 @@ MonoBehaviour:
   PlayerCamera: {fileID: 8730355085261574185}
   sensitivity: 1000
   turnAmount: {x: 0, y: 0}
---- !u!114 &8730355085803973919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522794632265265790}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: f83fb65da34de904bacfad90434afe5e, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 1f2e2bb5-6d2d-45ff-b54a-8dcfe7ab3602
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8058462d-beb9-4156-aa20-c38b8953a07e
-    m_ActionName: Player/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a853d5a5-6210-4528-be6d-ddabc6092514
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 685d6f56-de80-4565-a0cb-37dcd3682515
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cfd60e63-3db5-4f16-9237-fa0555ad7443
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 99dc29a1-f017-4a58-b32a-0a40bf439d38
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7338264e-ed9d-465f-be88-b3857434d757
-    m_ActionName: UI/Point[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d6bb61b7-2646-4a32-a6a0-6195004a063c
-    m_ActionName: UI/Click[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 9e17cb48-5128-4de9-9348-84231b9b040a
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d6b92653-4d7c-461e-8155-0eb7e63e5416
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5e3d5334-ac1b-4c7e-aea2-9ea31002933a
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b5be4530-ebbe-4a67-9410-7139124bd7e9
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4757bbde-b98f-402e-a822-6eaecbb7d08a
-    m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &-9143553965180812966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,15 +113,218 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
-    SerializedBytes: 0101060000007300740061007400650073002f000000000165000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00440069006300740069006f006e00610072007900600032005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d002c005b00530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c00690062000000000001010800000063006f006d00700061007200650072002f010000000159000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e00470065006e00650072006900630045007100750061006c0069007400790043006f006d0070006100720065007200600031005b005b00530079007300740065006d002e0053007400720069006e0067002c0020006d00730063006f0072006c00690062005d005d002c0020006d00730063006f0072006c00690062000100000005060200000000000000042e27010200000024006b000107000000770061006c006b0069006e006700010102000000240076002f020000000116000000530074006100740065002c00200041007300730065006d0062006c0079002d004300530068006100720070000200000001011100000069006e0067006f0069006e006700530074006100740065006d0065006e00740073002f030000000149000000530079007300740065006d002e0043006f006c006c0065006300740069006f006e0073002e00470065006e0065007200690063002e004c00690073007400600031005b005b00530074006100740065006d0065006e0074002c00200041007300730065006d0062006c0079002d004300530068006100720070005d005d002c0020006d00730063006f0072006c006900620003000000060100000000000000022f04000000011a000000530074006100740065006d0065006e0074002c00200041007300730065006d0062006c0079002d00430053006800610072007000040000000b010f00000074006100720067006500740043006f006d0070006f006e0065006e007400000000002701100000007400610072006700650074004d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010a00000069006e00700075007400560061006c0075006500010100000036002d010e00000069006e0070007500740043006f006d0070006f006e0065006e0074002d010f00000069006e007000750074004d0065006d006200650072004e0061006d0065002b0117000000730074006100740065006d0065006e00740049006e0076006f006b006500730041004d006500740068006f006400002b012f00000069006e00700075007400560061006c00750065004900730053006f0075007200630065006400460072006f006d0041006e004500780069007300740069006e00670043006f006d0070006f006e0065006e0074004600690065006c006400001f010b000000640065006c006100790041006d006f0075006e007400000000002d010e000000730074006100740065006d0065006e0074004e006f007400650073000507052d01120000006f007500740067006f0069006e006700530074006100740065006d0065006e00740073000505042e27010200000024006b000107000000720075006e006e0069006e0067000101020000002400760030020000000500000001011100000069006e0067006f0069006e006700530074006100740065006d0065006e0074007300300300000006000000060200000000000000023004000000070000000b010f00000074006100720067006500740043006f006d0070006f006e0065006e007400000000002701100000007400610072006700650074004d0065006d006200650072004e0061006d0065000116000000630075007200720065006e00740048006f00720069007a006f006e00740061006c005300700065006500640027010a00000069006e00700075007400560061006c007500650001000000000b010e00000069006e0070007500740043006f006d0070006f006e0065006e0074000000000027010f00000069006e007000750074004d0065006d006200650072004e0061006d0065000108000000720075006e00530070006500650064002b0117000000730074006100740065006d0065006e00740049006e0076006f006b006500730041004d006500740068006f006400002b012f00000069006e00700075007400560061006c00750065004900730053006f0075007200630065006400460072006f006d0041006e004500780069007300740069006e00670043006f006d0070006f006e0065006e0074004600690065006c006400011f010b000000640065006c006100790041006d006f0075006e007400000000002d010e000000730074006100740065006d0065006e0074004e006f0074006500730005023004000000080000000b010f00000074006100720067006500740043006f006d0070006f006e0065006e007400000000002701100000007400610072006700650074004d0065006d006200650072004e0061006d006500010d000000530074006100740065006d0065006e007400540065007300740027010a00000069006e00700075007400560061006c007500650001070000002200680065006c006c006f0022002d010e00000069006e0070007500740043006f006d0070006f006e0065006e0074002d010f00000069006e007000750074004d0065006d006200650072004e0061006d0065002b0117000000730074006100740065006d0065006e00740049006e0076006f006b006500730041004d006500740068006f006400012b012f00000069006e00700075007400560061006c00750065004900730053006f0075007200630065006400460072006f006d0041006e004500780069007300740069006e00670043006f006d0070006f006e0065006e0074004600690065006c006400001f010b000000640065006c006100790041006d006f0075006e007400000000002d010e000000730074006100740065006d0065006e0074004e006f007400650073000507052d01120000006f007500740067006f0069006e006700530074006100740065006d0065006e0074007300050507052d010c000000630075007200720065006e007400530074006100740065002d010d000000700072006500760069006f007500730053007400610074006500
+    SerializedFormat: 2
+    SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 8730355085803973917}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: states
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[State,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: walking
+    - Name: $v
+      Entry: 7
+      Data: 2|State, Assembly-CSharp
+    - Name: ingoingStatements
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[Action, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|Action, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 10
+      Data: 0
+    - Name: targetComponentName
+      Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 1
+      Data: currentHorizontalSpeed
+    - Name: inputValue
+      Entry: 1
+      Data: 6
+    - Name: inputComponent
+      Entry: 6
+      Data: 
+    - Name: inputMemberName
+      Entry: 6
+      Data: 
+    - Name: statementInvokesAMethod
+      Entry: 5
+      Data: false
+    - Name: inputValueIsSourcedFromAnExistingComponentField
+      Entry: 5
+      Data: false
+    - Name: useTryGetComponent
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: outgoingStatements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: running
+    - Name: $v
+      Entry: 7
+      Data: 5|State, Assembly-CSharp
+    - Name: ingoingStatements
+      Entry: 7
+      Data: 6|System.Collections.Generic.List`1[[Action, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 7|Action, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 10
+      Data: 0
+    - Name: targetComponentName
+      Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 1
+      Data: currentHorizontalSpeed
+    - Name: inputValue
+      Entry: 1
+      Data: 
+    - Name: inputComponent
+      Entry: 10
+      Data: 0
+    - Name: inputMemberName
+      Entry: 1
+      Data: runSpeed
+    - Name: statementInvokesAMethod
+      Entry: 5
+      Data: false
+    - Name: inputValueIsSourcedFromAnExistingComponentField
+      Entry: 5
+      Data: true
+    - Name: useTryGetComponent
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Action, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 10
+      Data: 0
+    - Name: targetComponentName
+      Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 1
+      Data: StatementTest
+    - Name: inputValue
+      Entry: 1
+      Data: '"hello"'
+    - Name: inputComponent
+      Entry: 6
+      Data: 
+    - Name: inputMemberName
+      Entry: 6
+      Data: 
+    - Name: statementInvokesAMethod
+      Entry: 5
+      Data: true
+    - Name: inputValueIsSourcedFromAnExistingComponentField
+      Entry: 5
+      Data: false
+    - Name: useTryGetComponent
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: outgoingStatements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: currentState
+      Entry: 6
+      Data: 
+    - Name: previousState
+      Entry: 6
+      Data: 
   stateType: Movement
   initialStateName: walking
   currentStateName: 
@@ -214,9 +336,33 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522794632265265790}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40e2eb8b7df32704a8104513a20f1894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6186233568464279357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522794632265265790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0825e5060017d2f40853cc02835896f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4544985932071206111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522794632265265790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693ec02c68138974e9e809935b765371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4441240546914155710

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class State
 {    
-    public List<Statement> ingoingStatements, outgoingStatements;
+    public List<Action> ingoingStatements, outgoingStatements;
 }

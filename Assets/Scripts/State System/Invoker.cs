@@ -9,58 +9,61 @@ public class Invoker
 {
     const BindingFlags bindingFlags = (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.InvokeMethod);        
 
-    public void ParseStatements(List<Statement> statements_)
+    public void ParseActions(List<Action> statements_)
     {
-        if (statements_ != null || statements_ != default(List<Statement>))
-            foreach(Statement statement in statements_)
+        if (statements_ != null || statements_ != default(List<Action>))
+            foreach(Action statement in statements_)
             {                                                                    
-                ParseStatement(statement);
+                ParseAction(statement);
             }       
         else        
         return;        
     }
     
-    public void ParseStatement(Statement statement_)
+    public void ParseAction(Action statement_)
     {      
-        DetermineActionAndApplyStatement(statement_);                        
+        DetermineActionAndApplyAction(statement_);                        
     }   
 
-    public void DetermineActionAndApplyStatement(Statement statement_)
+    private void DetermineActionAndApplyAction(Action statement_)
     {
-        if(statement_.targetComponent.GetType().HasMember_(statement_.targetMemberName, bindingFlags))
-        {                        
-            if(!statement_.statementInvokesAMethod) //If the statement doesn't invoke a method
-            {
-                if (!statement_.inputValueIsSourcedFromAnExistingComponentField) //If the input value is typed in via the inspector
-                {
-                    SetComponentField(statement_.targetComponent, statement_.targetMemberName, statement_.inputValue);
-                }
-                else //If the input value is a field from another component
-                {
-                    EquateComponentField(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputMemberName);
-                }
-            } 
-            else //If the statement invokes a method
-            {
-                if (!statement_.inputValueIsSourcedFromAnExistingComponentField) //If the input value is typed in via the inspector
-                {                    
-                    InvokeComponentMethod(statement_.targetComponent, statement_.targetMemberName, statement_.inputValue);    
-                    
-                }
-                else //If the input value is a field from another component
-                {                    
-                    InvokeComponentMethod(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputMemberName);
-                }
-            }
-
-        }
-        else
+        if(!statement_.useTryGetComponent)
         {
-            Debug.Log(statement_.targetComponent.name + "doesn't have the member: '" + statement_.targetMemberName + "'");
+            if(statement_.targetComponent.GetType().HasMember_(statement_.targetMemberName, bindingFlags))
+            {                        
+                if(!statement_.statementInvokesAMethod) //If the statement doesn't invoke a method
+                {
+                    if (!statement_.inputValueIsSourcedFromAnExistingComponentField) //If the input value is typed in via the inspector
+                    {
+                        SetComponentField(statement_.targetComponent, statement_.targetMemberName, statement_.inputValue);
+                    }
+                    else //If the input value is a field from another component
+                    {
+                        EquateComponentField(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputMemberName);
+                    }
+                } 
+                else //If the statement invokes a method
+                {
+                    if (!statement_.inputValueIsSourcedFromAnExistingComponentField) //If the input value is typed in via the inspector
+                    {                    
+                        InvokeComponentMethod(statement_.targetComponent, statement_.targetMemberName, statement_.inputValue);    
+                        
+                    }
+                    else //If the input value is a field from another component
+                    {                    
+                        InvokeComponentMethod(statement_.targetComponent, statement_.inputComponent, statement_.targetMemberName, statement_.inputMemberName);
+                    }
+                }
+
+            }
+            else
+            {
+                Debug.Log(statement_.targetComponent.name + "doesn't have the member: '" + statement_.targetMemberName + "'");
+            }        
         }        
     } 
 
-    public void InvokeComponentMethod(Component componentBeingAltered_, Component componentBeingTakenFrom_, string invokedMethodName_, string fieldTakenFrom_)
+    private void InvokeComponentMethod(Component componentBeingAltered_, Component componentBeingTakenFrom_, string invokedMethodName_, string fieldTakenFrom_)
     {
         List<object> values = new();                        
 
@@ -73,7 +76,7 @@ public class Invoker
         .Invoke(componentBeingAltered_, bindingFlags, null, values.ToArray(), null);
     }
     
-    public void InvokeComponentMethod(Component componentBeingAltered_, string methodName_, string parameter_)
+    private void InvokeComponentMethod(Component componentBeingAltered_, string methodName_, string parameter_)
     {                              
         List<object> parameters = new();                          
 
@@ -98,7 +101,7 @@ public class Invoker
         .Invoke(componentBeingAltered_, bindingFlags, null, parameters.ToArray(), null);        
     }
 
-    public void SetComponentField(Component componentBeingAltered_, string fieldName_, string parameters_)
+    private void SetComponentField(Component componentBeingAltered_, string fieldName_, string parameters_)
     {        
         FieldInfo infoOfFieldBeingSet = componentBeingAltered_.GetType().GetField(fieldName_, bindingFlags); //Get Info for the field that's being set        
 
@@ -109,7 +112,7 @@ public class Invoker
         infoOfFieldBeingSet.SetValue(componentBeingAltered_, JsonConvert.DeserializeObject(parameters_, infoOfFieldBeingSet.GetValue(componentBeingAltered_).GetType()));        
     }
 
-    public void EquateComponentField(Component componentBeingAltered_, Component componentBeingTakenFrom_, string alteredFieldName_, string takenFromFieldName_)
+    private void EquateComponentField(Component componentBeingAltered_, Component componentBeingTakenFrom_, string alteredFieldName_, string takenFromFieldName_)
     {
         FieldInfo infoOfFieldBeingSet = componentBeingAltered_.GetType().GetField(alteredFieldName_, bindingFlags); //Get Info for the field that's being set
         FieldInfo infoOfFieldBeingTakenFrom = componentBeingTakenFrom_.GetType().GetField(takenFromFieldName_, bindingFlags); //Get Info for the field that's being potentially being taken from
