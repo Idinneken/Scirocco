@@ -572,14 +572,63 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 652380303}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: onPickupActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Action, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|Action, Assembly-CSharp
+    - Name: targetComponent
+      Entry: 10
+      Data: 0
+    - Name: targetComponentName
       Entry: 6
+      Data: 
+    - Name: targetMemberName
+      Entry: 1
+      Data: ConsumePotion
+    - Name: inputValue
+      Entry: 6
+      Data: 
+    - Name: inputComponent
+      Entry: 6
+      Data: 
+    - Name: inputMemberName
+      Entry: 6
+      Data: 
+    - Name: statementInvokesAMethod
+      Entry: 5
+      Data: false
+    - Name: inputValueIsSourcedFromAnExistingComponentField
+      Entry: 5
+      Data: false
+    - Name: useTryGetComponent
+      Entry: 5
+      Data: false
+    - Name: delayAmount
+      Entry: 4
+      Data: 0
+    - Name: statementNotes
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: onSwitchActions
       Entry: 6
@@ -587,15 +636,16 @@ MonoBehaviour:
     - Name: onUseActions
       Entry: 6
       Data: 
-  grabBox: {fileID: 652380298}
-  associatedComponents: []
-  activatesOnPickup: 0
+  itemTypeID: ManaPotion
+  collectBox: {fileID: 652380298}
+  associatedComponents:
+  - {fileID: 652380303}
+  activatesOnPickup: 1
   activatesOnSwitch: 0
   activatesOnUse: 0
-  removedOnPickup: 0
+  removedOnPickup: 1
   removedOnSwitch: 0
   removedOnUse: 0
-  fungible: 0
 --- !u!136 &652380298
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -701,9 +751,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  isHealthPotion: 0
+  isHealthPotion: 1
   isManaPotion: 0
-  value: 0
+  value: 20
 --- !u!1 &698305934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,7 +1713,7 @@ PrefabInstance:
       objectReference: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
@@ -1675,20 +1725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[2]
-      value: '"path":"states.{\"running\"}.ingoingStatements.[1].inputValue","value":{"$id":0,"$type":"System.String,
-        mscorlib","[\"hello\"]"}'
-      objectReference: {fileID: 0}
-    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[3]
       value: '"path":"states.{\"running\"}.ingoingStatements.[1].targetComponent","value":$eref:0'
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[4]
-      value: '"path":"states.{\"walking\"}.ingoingStatements.[0].targetComponent","value":$eref:0'
-      objectReference: {fileID: 0}
-    - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -9143553965180812966, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
@@ -1740,6 +1781,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1600487137859129885, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544985932071206111, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4544985932071206111, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+    - target: {fileID: 4544985932071206111, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544985932071206111, guid: 921a58039afbef948a3ffeaedec4a742, type: 3}
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

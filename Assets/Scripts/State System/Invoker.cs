@@ -92,10 +92,6 @@ public class Invoker
                 }
             }                                  
         }
-        else
-        {
-            parameters = null;                   
-        }                      
         
         componentBeingAltered_.GetType().GetMethod(methodName_, bindingFlags, null, parameters.GetTypes_().ToArray(), null)
         .Invoke(componentBeingAltered_, bindingFlags, null, parameters.ToArray(), null);        

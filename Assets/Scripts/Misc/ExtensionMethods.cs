@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Extensions
 {
@@ -74,7 +75,12 @@ namespace Extensions
             }
 
             return types;
-        }        
+        }
+
+        public static bool IsEmpty<T>(this IList<T> list_)
+        {
+            return !list_.Any();
+        }
 
     }
 
@@ -109,33 +115,54 @@ namespace Extensions
             return Vector3.Angle(point1 - vertexPoint, point2 - vertexPoint);
         }
 
+        public static GameObject GetClosestGameObject(this Transform transform_, List<GameObject> gameObjects_)
+        {
+            GameObject bestTarget = null;
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = transform_.position;
+            foreach (GameObject potentialObject in gameObjects_)
+            {
+                Vector3 directionToTarget = potentialObject.transform.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialObject;
+                }
+            }
+
+            return bestTarget;
+        }
+
         public static void CopyPasteComponent_(this GameObject destination_, Component component_)
         {
-            System.Type type = component_.GetType();
+            Type type = component_.GetType();
             Component copy = destination_.AddComponent(type);
             // Copied fields can be restricted with BindingFlags
-            System.Reflection.FieldInfo[] fields = type.GetFields(); 
-            foreach (System.Reflection.FieldInfo field in fields)
+            FieldInfo[] fields = type.GetFields(); 
+            foreach (FieldInfo field in fields)
             {
                 field.SetValue(copy, field.GetValue(component_));
             }
             // return copy;
         }
 
-        // public static Component TransferComponent(this GameObject original_, Component destination)
-        // {
-        //     System.Type type = original.GetType();
-        //     Component copy = destination.AddComponent(type);
-        //     System.Reflection.FieldInfo[] fields = type.GetFields();
-        //     foreach (System.Reflection.FieldInfo field in fields)
-        //     {
-        //         field.SetValue(copy, field.GetValue(original));
-        //     }
-        //     return copy;
-        // }
+        
+
+    //public static Component CopyComponent_(this GameObject original_, Component destination)
+    //{
+    //    Type type = original_.GetType();
+    //    Component copy = destination.AddComponent(type);
+    //    System.Reflection.FieldInfo[] fields = type.GetFields();
+    //    foreach (System.Reflection.FieldInfo field in fields)
+    //    {
+    //        field.SetValue(copy, field.GetValue(original));
+    //    }
+    //    return copy;
+    //}
 
 
-    }
+}
 }
     
 

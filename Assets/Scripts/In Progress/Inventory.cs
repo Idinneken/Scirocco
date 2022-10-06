@@ -1,59 +1,53 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : SerializedMonoBehaviour
 {
-    // Dictionary<string, InventoryItemBundle> items = new();
+    public Dictionary<string, string> keybindItemTypeIDPairs = new();
+    public Dictionary<string, List<InventoryItem>> inventory = new();
 
-    // public void AddItem(string itemCategory_, GameObject item_, string keybind_)
-    // {        
-    //     if (!items.ContainsKey(itemCategory_))
-    //     {            
-    //         items.Add(itemCategory_, new List<GameObject>());
-    //         items[itemCategory_].Add(item_);
-    //     }
-    //     else
-    //     {
-    //         items[itemCategory_].Add(item_);
-    //     }
-    // }
+    public void AddItem(InventoryItem item_)
+    {
+        if (!inventory.ContainsKey(item_.itemTypeID))
+        {
+            inventory.Add(item_.itemTypeID, new List<InventoryItem>());
+        }
 
-    // Dictionary<string, InventoryItemBundle> items = new();
+        inventory[item_.itemTypeID].Add(item_);
+    }
 
-    // Dictionary<InventoryItem, List<InventoryItem>> items = new();
-    // Dictionary<List<Component>, GameObject> items;    
+    public void RemoveItem(InventoryItem item_)
+    {
+        if (inventory.ContainsKey(item_.itemTypeID))
+        {
+            inventory[item_.itemTypeID].Remove(item_);
+        }
+    }
 
-    // public void AddItem(GameObject item, List<Component> identifyingComponents)
-    // {
-    //     items.TryAdd(identifyingComponents, item);        
-    // }
+    public void Update()
+    {
+        CheckIfAnItemIsBeingActivated(keybindItemTypeIDPairs);
+    }
 
-    // Dictionary<List<Component>, InventoryItemBundle
-}
+    public void CheckIfAnItemIsBeingActivated(Dictionary<string, string> bindItemTypeIDPairs_)
+    {
+        foreach (KeyValuePair<string, string> pair in bindItemTypeIDPairs_)
+        {
+            if (Input.GetKeyDown(pair.Key))
+            {
+                if (inventory[pair.Value].Count > 0)
+                {
+                    UseItem(inventory[pair.Value][0]);
+                }                                
+            }
+        }
+    }
 
-public class InventoryItemBundle
-{
-    public List<InventoryItem> items;
-    
-    public Component identifyingComponent;    
-    public string identifyingLabel;
-    public bool itemsAreDuplicates;
-    public string keybind;
-    
-    public InventoryItemBundle(Component identifyingComponent_, string identifyingLabel_, bool itemsAreDuplicates_, string keybind_)
+    public void UseItem(InventoryItem item_)
     {        
-        identifyingComponent = identifyingComponent_;
-        identifyingLabel = identifyingLabel_;
-        itemsAreDuplicates = itemsAreDuplicates_;
-        keybind = keybind_;
-        
-
-    }           
+        item_.UseFromInventory();
+    }
 }
 
-// public class InventoryItem
-// {
-//     GameObject item;
-    
-// }

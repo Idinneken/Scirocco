@@ -6,90 +6,84 @@ using Extensions;
 public class InventoryItem : SerializedMonoBehaviour
 {    
     internal Inventory ownerInventory;
-    public Collider grabBox;    
-    public List<Component> associatedComponents;
-    // public GameObject associatedObject;
+    internal GameObject sourceObject, owner;
 
+    public string itemTypeID;
+    [Space]
+    public Collider collectBox;    
+    public List<Component> associatedComponents;    
     public List<Action> onPickupActions, onSwitchActions, onUseActions;
     [Space]
     public bool activatesOnPickup; 
     public bool activatesOnSwitch;
     public bool activatesOnUse;
     [Space]
-    public bool removedOnPickup; 
-    public bool removedOnSwitch; 
-    public bool removedOnUse;
-    [Space]
-    public bool fungible;
+    public bool deletedOnPickup; 
+    public bool deletedOnSwitch; 
+    public bool deletedOnUse;
 
-    private Invoker invoker;
+    private Invoker invoker = new();
 
     void Start()
     {
-        GameObject itemObject = new();
-        
-        if (!associatedComponents.Contains(this))
-        {
-            associatedComponents.Add(this);
-        }
-
-        foreach(Component component in associatedComponents)
-        {
-            itemObject.CopyPasteComponent_(component);
-        }
+        sourceObject = gameObject;
     }
 
-    public void GrabItem(Inventory ownerInventory_)
+    public void PickUp(Inventory ownerInventory_)
     {                
         ownerInventory = ownerInventory_;
 
         if (activatesOnPickup)
         {
-            invoker.ParseActions(onPickupActions);
+            ActivateItem(onPickupActions);            
         }
 
-        if(removedOnPickup)
+        //CollectItem();
+
+        if(deletedOnPickup)
         {
-            Object.Destroy(gameObject, 0f);
-        }
-        else
-        {
-            // ownerInventory.gameObject
-            // ownerInventory.isActiveAndEnabled()
-        }
+            PurgeItem();
+        }       
     }
 
-    public void SwitchToItem()
-    {        
-    }
-
-    public void UseItem()
+    public void UseFromInventory()
     {
         if (activatesOnUse)
         {
-            invoker.ParseActions(onUseActions);
+            ActivateItem(onUseActions);            
         }
 
-        if (removedOnUse)
+        if (deletedOnUse)
         {
-            Object.Destroy(this, 0f);
+            PurgeItem();
         }
-    }
+    }    
 
+    //public void CollectItem()
+    //{
+    //    //ownerInventory.AddItem(new InventoryItem().);
+    //    Destroy(gameObject, 0f);
+    //}
 
-    Component CopyComponent(Component original, GameObject destination)
+    public void PurgeItem()
     {
-        System.Type type = original.GetType();
-        Component copy = destination.AddComponent(type);
-        // Copied fields can be restricted with BindingFlags
-        System.Reflection.FieldInfo[] fields = type.GetFields(); 
-        foreach (System.Reflection.FieldInfo field in fields)
-        {
-            field.SetValue(copy, field.GetValue(original));
-        }
-        return copy;
+        ownerInventory.RemoveItem(this);        
     }
 
-    
-    
+    public void ActivateItem(List<Action> actions_)
+    {
+        invoker.ParseActions(actions_);
+    }
+
+    //public void DropItem()
+    //{
+    //    ownerInventory.RemoveItem(itemTypeID, this);
+    //    Instantiate(sourceObject);
+    //    Destroy(this); 
+    //}
+
+    public void SwitchedTo()
+    {
+    }
+
 }

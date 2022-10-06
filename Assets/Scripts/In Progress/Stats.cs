@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-    float health, maxHealth, minHealth;
-    float mana, maxMana, minMana;
+    public float startHealth;
+    public float health;
+    public float maxHealth;
+    public float minHealth;
+    [Space]
+    public float startMana;
+    public float mana;
+    public float maxMana;
+    public float minMana;
+
+    void Start()
+    {
+        health = startHealth;
+        VerifyHealth();
+
+        mana = startMana;
+        VerifyMana();
+    }
 
     public void HealHealth(float amount_)
     {
