@@ -82,6 +82,23 @@ namespace Extensions
             return !list_.Any();
         }
 
+
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> list_)
+        {
+            if (list_ == null)
+            {
+                return true;
+            }
+            /* If this is a list, use the Count property for efficiency. 
+            * The Count property is O(1) while IEnumerable.Count() is O(N). */
+            var collection = list_ as ICollection<T>;
+            if (collection != null)
+            {
+                return collection.Count < 1;
+            }
+            return !list_.Any(); 
+        }
+
     }
 
     public static class UnityEngineExtensions
