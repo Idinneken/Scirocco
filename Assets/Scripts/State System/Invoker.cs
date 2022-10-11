@@ -121,12 +121,12 @@ public class Invoker
         List<object> values = new();                          
         if (!string.IsNullOrWhiteSpace(parameter_))
         {
-            Debug.Log("parameter_: " + parameter_);
+            //Debug.Log("parameter_: " + parameter_);
             values = JsonConvert.DeserializeObject<List<object>>(parameter_);     
 
             for (int i = 0; i < values.Count; i++)
             {
-                Debug.Log(values[i]);
+                //Debug.Log(values[i]);
 
                 if (values[i].GetType() == typeof(long))
                 {                    
