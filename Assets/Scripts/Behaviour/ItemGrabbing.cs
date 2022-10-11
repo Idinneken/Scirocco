@@ -14,18 +14,13 @@ public class ItemGrabbing : MonoBehaviour
     private void Update()
     {        
         if (Input.GetKeyDown(grabKeybind) && !itemsInRange.IsEmpty())
-        {                        
-            for (int i = 0; i < itemsInRange.Count; i++)
-            {
-                print(itemsInRange[i]);
-            }
-
+        {                                    
             PickUpItem(transform.GetClosestGameObject(itemsInRange));
         }
-        else if (Input.GetKeyDown(grabKeybind))
-        {
-            print("nothing in range");
-        }
+        //else if (Input.GetKeyDown(grabKeybind))
+        //{
+        //    print("nothing in range");
+        //}
     }
 
     private void OnTriggerEnter(Collider other_)

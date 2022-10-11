@@ -9,8 +9,7 @@ public class InventoryItem : SerializedMonoBehaviour
 
     public string itemTypeID;
     [Space]
-    public Collider collectBox;    
-    public List<Component> associatedComponents;    
+    public Collider collectBox;        
     [Space]
     public List<Action> onPickupActions; /*onSwitchActions,*/ 
     public List<Action> onUseActions;

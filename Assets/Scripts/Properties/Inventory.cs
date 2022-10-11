@@ -13,7 +13,7 @@ public class Inventory : SerializedMonoBehaviour
     public void AddItem(GameObject item_)
     {        
         InventoryItem itemComponent;
-        if (!item_.TryGetComponent<InventoryItem>(out itemComponent))
+        if (!item_.TryGetComponent(out itemComponent))
         {
             print("This isn't an inventory item.");
             return;
@@ -46,9 +46,9 @@ public class Inventory : SerializedMonoBehaviour
     {
         foreach (KeyValuePair<string, string> bindItemPair in bindItemTypeIDPairs_)
         {
-            List<GameObject> itemList;
-
-            if (Input.GetKeyDown(bindItemPair.Key) && items.TryGetValue(bindItemPair.Value, out itemList))
+            //print(bindItemPair.Key);
+            List<GameObject> gobjects;
+            if (Input.GetKeyDown(bindItemPair.Key) && items.TryGetValue(bindItemPair.Value, out gobjects))
             {            
                 GameObject item = items[bindItemPair.Value][0];        
                 InventoryItem itemComponent = item.GetComponent<InventoryItem>();
