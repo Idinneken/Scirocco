@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryItem : SerializedMonoBehaviour
 {    
     internal Inventory ownerInventory;
-    internal GameObject sourceObject, owner;
+    internal GameObject owner;
 
     public string itemTypeID;
     [Space]
@@ -21,17 +21,5 @@ public class InventoryItem : SerializedMonoBehaviour
     [Space]
     public bool deletedOnPickup; 
     // public bool deletedOnSwitch; 
-    public bool deletedOnUse;
-
-    // private Invoker invoker = new();
-
-    void Start()
-    {
-        sourceObject = gameObject;
-    }
-    
-    // public void ActivateItem(List<Action> actions_)
-    // {
-    //     invoker.ParseActions(actions_);
-    // }
+    public bool deletedOnUse;  
 }

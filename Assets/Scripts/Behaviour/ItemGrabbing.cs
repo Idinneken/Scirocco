@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
-using System.Runtime.CompilerServices;
-using Sirenix.Utilities;
 
 public class ItemGrabbing : MonoBehaviour
 {    
@@ -17,8 +14,7 @@ public class ItemGrabbing : MonoBehaviour
     private void Update()
     {        
         if (Input.GetKeyDown(grabKeybind) && !itemsInRange.IsEmpty())
-        {            
-            // itemsInRange.TrimExcess();
+        {                        
             for (int i = 0; i < itemsInRange.Count; i++)
             {
                 print(itemsInRange[i]);
@@ -58,7 +54,6 @@ public class ItemGrabbing : MonoBehaviour
 
         if (itemComponent.activatesOnPickup)
         {
-            // itemComponent.ActivateItem(itemComponent?.onPickupActions);
             invoker.ParseActions(itemComponent.onPickupActions);
         }
 
